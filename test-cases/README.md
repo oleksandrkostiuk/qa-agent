@@ -2,4 +2,4 @@
 
 | Feature | Flows | Total Cases | Last Updated |
 |---------|-------|-------------|--------------|
-| main-page-input-forms | 2 | 16 | 2026-07-17 |
+| main-page-input-forms | 2 | 17 | 2026-07-23 |

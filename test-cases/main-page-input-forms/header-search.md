@@ -1,7 +1,7 @@
 # Header Search — Test Cases
 Feature: main-page-input-forms
 Scope: UI
-Total: 6 cases (Critical: 1, High: 1, Medium: 2, Low: 2)
+Total: 7 cases (Critical: 1, High: 1, Medium: 3, Low: 2)
 
 ---
 ID: TC-MAINPAGE-SEARCH-001
@@ -103,4 +103,21 @@ Steps:
   2. Enter "test" as the query
   3. Submit the search form
 Expected Result: Search executes successfully with no authentication prompt, redirect to a login page, or access-denied error.
+Linked Requirement: None
+
+---
+ID: TC-MAINPAGE-SEARCH-007
+Title: Autocomplete suggestions appear while typing in the header search field
+Type: UI
+Feature: main-page-input-forms
+Flow: header-search
+Priority: Medium
+Tags: UI
+Preconditions: Anonymous user on the main page; header search form visible
+Test Data: query = "gla" (partial term)
+Steps:
+  1. Click into the header search field
+  2. Type "gla" character by character into the search field
+  3. Wait briefly and observe the area below/near the search field for a suggestions dropdown
+Expected Result: A suggestions/autocomplete dropdown appears showing matching suggestions as the user types; if no suggestions feature exists, no dropdown appears and no JS error occurs — record actual behavior observed.
 Linked Requirement: None

@@ -106,5 +106,23 @@
     ],
     "expected_result": "Search executes successfully with no authentication prompt, redirect to a login page, or access-denied error.",
     "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-007",
+    "title": "Autocomplete suggestions appear while typing in the header search field",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "gla"},
+    "steps": [
+      "Click into the header search field",
+      "Type \"gla\" character by character into the search field",
+      "Wait briefly and observe the area below/near the search field for a suggestions dropdown"
+    ],
+    "expected_result": "A suggestions/autocomplete dropdown appears showing matching suggestions as the user types; if no suggestions feature exists, no dropdown appears and no JS error occurs — record actual behavior observed.",
+    "linked_requirement": "None"
   }
 ]
