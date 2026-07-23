@@ -12,9 +12,10 @@
     "steps": [
       "Scroll to the footer legal links section",
       "Locate the \"Privacy Policy\" link",
-      "Read its href attribute (and target/rel attributes, if present)"
+      "Read its href attribute (and target/rel attributes, if present)",
+      "Click the link and verify the destination page loads successfully (no 404 or other error page)"
     ],
-    "expected_result": "The \"Privacy Policy\" link is visible, has a non-empty href pointing to a privacy-policy destination, and any target/rel attributes present are well-formed. (Destination page load is out of scope for this suite.)",
+    "expected_result": "The \"Privacy Policy\" link is visible, has a non-empty href pointing to a privacy-policy destination, any target/rel attributes present are well-formed, and clicking it successfully loads the destination page with no 404 or other error.",
     "linked_requirement": "None"
   },
   {
@@ -30,9 +31,10 @@
     "steps": [
       "Scroll to the footer legal links section",
       "Locate the \"Terms & Conditions\" link",
-      "Read its href attribute (and target/rel attributes, if present)"
+      "Read its href attribute (and target/rel attributes, if present)",
+      "Click the link and verify the destination page loads successfully (no 404 or other error page)"
     ],
-    "expected_result": "The \"Terms & Conditions\" link is visible, has a non-empty href pointing to a terms-and-conditions destination, and any target/rel attributes present are well-formed. (Destination page load is out of scope for this suite.)",
+    "expected_result": "The \"Terms & Conditions\" link is visible, has a non-empty href pointing to a terms-and-conditions destination, any target/rel attributes present are well-formed, and clicking it successfully loads the destination page with no 404 or other error.",
     "linked_requirement": "None"
   }
 ]

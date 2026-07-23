@@ -17,7 +17,8 @@ Steps:
   1. Scroll to the footer legal links section
   2. Locate the "Privacy Policy" link
   3. Read its href attribute (and target/rel attributes, if present)
-Expected Result: The "Privacy Policy" link is visible, has a non-empty href pointing to a privacy-policy destination, and any target/rel attributes present are well-formed. (Destination page load is out of scope for this suite — see OPEN RISKS in explorer-output/footer.md.)
+  4. Click the link and verify the destination page loads successfully (no 404 or other error page)
+Expected Result: The "Privacy Policy" link is visible, has a non-empty href pointing to a privacy-policy destination, any target/rel attributes present are well-formed, and clicking it successfully loads the destination page with no 404 or other error.
 Linked Requirement: None
 
 ---
@@ -34,5 +35,6 @@ Steps:
   1. Scroll to the footer legal links section
   2. Locate the "Terms & Conditions" link
   3. Read its href attribute (and target/rel attributes, if present)
-Expected Result: The "Terms & Conditions" link is visible, has a non-empty href pointing to a terms-and-conditions destination, and any target/rel attributes present are well-formed. (Destination page load is out of scope for this suite.)
+  4. Click the link and verify the destination page loads successfully (no 404 or other error page)
+Expected Result: The "Terms & Conditions" link is visible, has a non-empty href pointing to a terms-and-conditions destination, any target/rel attributes present are well-formed, and clicking it successfully loads the destination page with no 404 or other error.
 Linked Requirement: None
