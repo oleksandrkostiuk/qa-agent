@@ -1,0 +1,46 @@
+[
+  {
+    "id": "TC-FOOTER-SOCIAL-001",
+    "status": "pass",
+    "actual_result": "href=https://www.instagram.com/skylineglass/, target=\"_blank\", rel=\"noopener noreferrer nofollow\". Clicking opened a new tab to the Instagram profile page (title: 'Skyline Glass (@skylineglass) • Instagram photos and videos'), loaded successfully with no 404 or error page.",
+    "expected_result": "Instagram link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". Clicking it opens a new tab whose destination page loads successfully with no 404 or other error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T17:43:53"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-002",
+    "status": "pass",
+    "actual_result": "href=https://www.linkedin.com/company/skyline-design/, target=\"_blank\", rel=\"noopener noreferrer nofollow\". Clicking opened a new tab; LinkedIn redirected the unauthenticated visitor to its authwall/sign-up page (title: 'Sign Up | LinkedIn') with a sessionRedirect parameter pointing back to the correct company page URL. This is standard LinkedIn behavior for logged-out visitors, not a footer defect. No 404 or error page was shown.",
+    "expected_result": "LinkedIn link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". Clicking it opens a new tab whose destination page loads successfully with no 404 or other error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T17:43:53"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-003",
+    "status": "pass",
+    "actual_result": "href=https://www.facebook.com/skylinedesignglass/, target=\"_blank\", rel=\"noopener noreferrer nofollow\". Clicking opened a new tab; Facebook showed its standard login wall (title: 'Facebook') with a next-redirect parameter pointing to the correct company page URL. This is standard Facebook behavior for logged-out visitors, not a footer defect. No 404 or error page was shown.",
+    "expected_result": "Facebook link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". Clicking it opens a new tab whose destination page loads successfully with no 404 or other error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T17:43:53"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-004",
+    "status": "pass",
+    "actual_result": "href=http://www.youtube.com/@skyline-glass, target=\"_blank\", rel=\"noopener noreferrer nofollow\". Clicking opened a new tab to the YouTube channel page (title: 'Skyline Design - YouTube'), loaded successfully with no 404 or error page.",
+    "expected_result": "YouTube link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". Clicking it opens a new tab whose destination page loads successfully with no 404 or other error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T17:43:53"
+  }
+]
