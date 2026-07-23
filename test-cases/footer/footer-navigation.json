@@ -1,0 +1,38 @@
+[
+  {
+    "id": "TC-FOOTER-NAV-001",
+    "title": "Verify footer navigation menu displays all 15 links with valid labels and hrefs",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "footer-navigation",
+    "priority": "Medium",
+    "tags": ["smoke", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"expected_link_count": 15},
+    "steps": [
+      "Scroll to the footer navigation menu",
+      "Count the number of navigation links displayed",
+      "For each link, read its visible label text and its href attribute"
+    ],
+    "expected_result": "Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. (Destination page load is out of scope for this suite.)",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-NAV-002",
+    "title": "Verify \"Home\" footer nav link shows active state on homepage",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "footer-navigation",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {},
+    "steps": [
+      "Scroll to the footer navigation menu",
+      "Locate the \"Home\" link",
+      "Inspect the link element's class attribute"
+    ],
+    "expected_result": "The \"Home\" link includes the current-menu-item class (or equivalent active-state indicator) while the user is on the homepage.",
+    "linked_requirement": "None"
+  }
+]
