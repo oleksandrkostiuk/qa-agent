@@ -1,0 +1,24 @@
+[
+  {
+    "id": "TC-MAINPAGE-SEARCH-001",
+    "status": "pass",
+    "actual_result": "Clicked the header search icon (#generalSearch-opener) to open the search panel, entered \"glass\" into the search field, and submitted. Browser navigated to https://dev.skyline.glass/?s=glass and rendered a search results page titled \"217 Search results for “glass”\" with a results table and pagination. No error occurred.",
+    "expected_result": "Browser navigates to \"/?s=glass\" (or equivalent results route) and a search results page is rendered with no error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T10:29:41Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-001",
+    "status": "fail",
+    "actual_result": "Attempt 1: Scrolled to footer newsletter signup form, entered \"qa-test-001@example.com\" into the email field, clicked Subscribe. Form re-rendered with heading \"There was a problem with your submission. Please review the fields below.\" and the email field marked invalid, despite a syntactically valid email. Attempt 2 (retry): repeated the same steps from a fresh page load with the same email value — identical failure occurred (same error heading, email field marked invalid again). No console errors were logged; the only network-adjacent element present is the reCAPTCHA v3 iframe, consistent with a possible bot-score rejection, but this was not confirmed via network inspection.",
+    "expected_result": "Form submits successfully and a confirmation/success message is displayed to the user; no error is shown.",
+    "error_message": "There was a problem with your submission. Please review the fields below. (email field marked invalid)",
+    "screenshot": "screenshots/TC-MAINPAGE-NEWSLETTER-001.png",
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T10:31:58Z"
+  }
+]
