@@ -1,0 +1,56 @@
+[
+  {
+    "id": "TC-FOOTER-NEWSLETTER-001",
+    "title": "Submit newsletter signup form with empty email field",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative", "boundary", "UI"],
+    "preconditions": ["Homepage (https://dev.skyline.glass/) is loaded", "Footer newsletter signup section is visible"],
+    "test_data": {"email": ""},
+    "steps": [
+      "Scroll to the footer newsletter signup section",
+      "Leave the email input field empty",
+      "Click the newsletter Submit button"
+    ],
+    "expected_result": "Form does not submit successfully. A top banner displays 'There was a problem with your submission. Please review the fields below.' An inline error 'This field is required.' appears under the email field, and the field's aria-invalid attribute is set to 'true'.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-NEWSLETTER-002",
+    "title": "Submit newsletter signup form with malformed email (missing @ symbol)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative", "boundary", "UI"],
+    "preconditions": ["Homepage is loaded", "Footer newsletter signup section is visible"],
+    "test_data": {"email": "notanemail"},
+    "steps": [
+      "Scroll to the footer newsletter signup section",
+      "Enter \"notanemail\" into the email field",
+      "Click the newsletter Submit button"
+    ],
+    "expected_result": "Form does not submit successfully. Inline error 'The email address entered is invalid, please check the formatting (e.g. email@domain.com).' appears under the email field, and the field's aria-invalid attribute is set to 'true'.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-NEWSLETTER-003",
+    "title": "Submit newsletter signup form with malformed email (missing domain)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "newsletter-signup",
+    "priority": "Low",
+    "tags": ["negative", "boundary", "UI"],
+    "preconditions": ["Homepage is loaded", "Footer newsletter signup section is visible"],
+    "test_data": {"email": "test@domain"},
+    "steps": [
+      "Scroll to the footer newsletter signup section",
+      "Enter \"test@domain\" into the email field",
+      "Click the newsletter Submit button"
+    ],
+    "expected_result": "Form does not submit successfully. Inline error 'The email address entered is invalid, please check the formatting (e.g. email@domain.com).' appears under the email field, and the field's aria-invalid attribute is set to 'true'.",
+    "linked_requirement": "None"
+  }
+]
