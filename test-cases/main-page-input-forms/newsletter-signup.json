@@ -24,7 +24,7 @@
     "feature": "main-page-input-forms",
     "flow": "newsletter-signup",
     "priority": "High",
-    "tags": ["negative", "boundary"],
+    "tags": ["negative", "boundary", "regression"],
     "preconditions": ["Anonymous user on the main page; footer visible"],
     "test_data": {"email": ""},
     "steps": [

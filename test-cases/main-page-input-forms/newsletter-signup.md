@@ -27,7 +27,7 @@ Type: UI
 Feature: main-page-input-forms
 Flow: newsletter-signup
 Priority: High
-Tags: negative, boundary
+Tags: negative, boundary, regression
 Preconditions: Anonymous user on the main page; footer visible
 Test Data: email = "" (empty)
 Steps:
