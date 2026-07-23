@@ -1,0 +1,128 @@
+[
+  {
+    "id": "TC-MAINPAGE-SEARCH-001",
+    "title": "Searching with a valid query returns to the search results page",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Critical",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "glass"},
+    "steps": [
+      "Click into the header search field",
+      "Enter \"glass\" as the query",
+      "Submit the search form"
+    ],
+    "expected_result": "Browser navigates to \"/?s=glass\" (or equivalent results route) and a search results page is rendered with no error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-002",
+    "title": "Submitting an empty search query is handled gracefully",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": ""},
+    "steps": [
+      "Click into the header search field",
+      "Leave the query field empty",
+      "Submit the search form"
+    ],
+    "expected_result": "Form either prevents submission client-side, or navigates to a results page showing an appropriate empty/no-query state; no page crash or server error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-003",
+    "title": "Search query containing a script injection string is safely handled",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "High",
+    "tags": ["security", "negative"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "<script>alert(1)</script>"},
+    "steps": [
+      "Click into the header search field",
+      "Enter \"<script>alert(1)</script>\" as the query",
+      "Submit the search form"
+    ],
+    "expected_result": "Query string is escaped/encoded in the URL and rendered results page; no script execution occurs (no JS alert), no unescaped HTML injection is visible in the rendered page.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-004",
+    "title": "Submitting a very long search query string is handled without error",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "500-character alphanumeric string"},
+    "steps": [
+      "Click into the header search field",
+      "Enter a 500-character alphanumeric string as the query",
+      "Submit the search form"
+    ],
+    "expected_result": "Results page loads without a crash, unhandled JS error, or server 500; an appropriate results/no-results state is shown.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-005",
+    "title": "Submitting a whitespace-only search query is handled gracefully",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "   "},
+    "steps": [
+      "Click into the header search field",
+      "Enter \"   \" (whitespace only) as the query",
+      "Submit the search form"
+    ],
+    "expected_result": "Form treats the query as effectively empty — either blocks submission or shows an appropriate empty/no-query results state; no page crash or server error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-006",
+    "title": "Header search is fully usable without authentication",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Low",
+    "tags": ["security", "UI"],
+    "preconditions": ["Anonymous (unauthenticated) user on the main page; no login state exists on this site"],
+    "test_data": {"query": "test"},
+    "steps": [
+      "As an anonymous user (no login performed), click into the header search field",
+      "Enter \"test\" as the query",
+      "Submit the search form"
+    ],
+    "expected_result": "Search executes successfully with no authentication prompt, redirect to a login page, or access-denied error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-007",
+    "title": "Autocomplete suggestions appear while typing in the header search field",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "header-search",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Anonymous user on the main page; header search form visible"],
+    "test_data": {"query": "gla"},
+    "steps": [
+      "Click into the header search field",
+      "Type \"gla\" character by character into the search field",
+      "Wait briefly and observe the area below/near the search field for a suggestions dropdown"
+    ],
+    "expected_result": "A suggestions/autocomplete dropdown appears showing matching suggestions as the user types; if no suggestions feature exists, no dropdown appears and no JS error occurs — record actual behavior observed.",
+    "linked_requirement": "None"
+  }
+]

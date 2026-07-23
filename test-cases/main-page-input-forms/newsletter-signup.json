@@ -1,0 +1,183 @@
+[
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-001",
+    "title": "Subscribe with a valid test-domain email succeeds",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Critical",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["Anonymous user on the main page (dev environment); footer visible"],
+    "test_data": {"email": "qa-test-001@example.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form (Gravity Forms #5)",
+      "Enter \"qa-test-001@example.com\" into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form submits successfully and a confirmation/success message is displayed to the user; no error is shown.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-002",
+    "title": "Submitting the newsletter form with an empty email is rejected",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "High",
+    "tags": ["negative", "boundary", "regression"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": ""},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Leave the email field empty",
+      "Submit the form"
+    ],
+    "expected_result": "Form is not submitted; a validation error indicating the email field is required is displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-003",
+    "title": "Submitting an email missing the \"@\" symbol is rejected",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "High",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qatestexample.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qatestexample.com\" into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-004",
+    "title": "Submitting an email missing the domain part is rejected",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qatest@"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qatest@\" into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-005",
+    "title": "Submitting an email containing spaces is rejected",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qa test@example.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qa test@example.com\" into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-006",
+    "title": "Submitting an email with a trailing dot is handled correctly",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Low",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qa-test-006@example.com."},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qa-test-006@example.com.\" (note trailing dot) into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form either rejects the value with a validation error, or normalizes/accepts it consistently — behavior must not silently fail or throw an unhandled error. Record actual behavior observed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-007",
+    "title": "Submitting a very long email string is handled without error",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible; field has no visible maxLength attribute"],
+    "test_data": {"email": "300-character local part + \"@example.com\""},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter a 300+ character email string into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form either accepts and submits successfully or rejects with a clear validation error; no page crash, no unhandled JS error, no server 500.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-008",
+    "title": "Submitting an email with special/unicode characters is handled correctly",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qa-tëst+special_008@example.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qa-tëst+special_008@example.com\" into the email field",
+      "Submit the form"
+    ],
+    "expected_result": "Form either accepts the value as valid or rejects it with a clear validation error; behavior must be consistent and not throw an unhandled error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-009",
+    "title": "Rapid repeated submissions of the newsletter form do not create duplicate/erroneous requests",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the main page; footer visible"],
+    "test_data": {"email": "qa-test-009@example.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qa-test-009@example.com\" into the email field",
+      "Click submit multiple times in rapid succession (e.g. 5 clicks within 1 second)"
+    ],
+    "expected_result": "Only one submission is processed (button disables/debounces after first click, or duplicate clicks are ignored); no duplicate confirmation messages and no client-side error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-010",
+    "title": "Legitimate submission is not blocked by invisible reCAPTCHA v3",
+    "type": "UI",
+    "feature": "main-page-input-forms",
+    "flow": "newsletter-signup",
+    "priority": "High",
+    "tags": ["security"],
+    "preconditions": ["Anonymous user on the main page; footer visible. NOTE (OPEN RISK, user-confirmed): form protected by invisible reCAPTCHA v3 posting to a live Gravity Forms backend — automated submissions may receive a low bot score and be silently blocked; a failure here is a known execution risk, not a confirmed functional defect."],
+    "test_data": {"email": "qa-test-010@example.com"},
+    "steps": [
+      "Scroll to the footer newsletter signup form",
+      "Enter \"qa-test-010@example.com\" into the email field",
+      "Submit the form",
+      "Observe network tab / response for any reCAPTCHA-related rejection"
+    ],
+    "expected_result": "Form submits successfully with no reCAPTCHA-related block. If blocked, record as a known execution risk per OPEN RISKS before escalating as a bug.",
+    "linked_requirement": "None"
+  }
+]
