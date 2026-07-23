@@ -1,0 +1,55 @@
+[
+  {
+    "id": "TC-FOOTER-INFO-001",
+    "title": "Verify company address displays correctly in footer",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "company-info",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"expected_address": "Skyline, 1240 N Homan Ave, Chicago, IL 60651"},
+    "steps": [
+      "Scroll to the footer company-info block",
+      "Read the displayed address text"
+    ],
+    "expected_result": "Footer displays the exact address text 'Skyline, 1240 N Homan Ave, Chicago, IL 60651' as plain text (not a clickable link).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-INFO-002",
+    "title": "Verify company email displays correctly in footer",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "company-info",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"expected_email": "sales@skyline.glass"},
+    "steps": [
+      "Scroll to the footer company-info block",
+      "Read the displayed email text",
+      "Check whether the email text is rendered as a clickable mailto: link or as plain text"
+    ],
+    "expected_result": "Footer displays 'sales@skyline.glass' as plain text with no mailto: link. This is documented current behavior and is not treated as a defect.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-INFO-003",
+    "title": "Verify company phone number displays correctly in footer",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "company-info",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"expected_phone": "773-278-4660"},
+    "steps": [
+      "Scroll to the footer company-info block",
+      "Read the displayed phone number text",
+      "Check whether the phone text is rendered as a clickable tel: link or as plain text"
+    ],
+    "expected_result": "Footer displays '773-278-4660' as plain text with no tel: link. This is documented current behavior and is not treated as a defect.",
+    "linked_requirement": "None"
+  }
+]
