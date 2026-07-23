@@ -17,7 +17,8 @@ Steps:
   1. Scroll to the footer navigation menu
   2. Count the number of navigation links displayed
   3. For each link, read its visible label text and its href attribute
-Expected Result: Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. (Destination page load is out of scope for this suite — see OPEN RISKS in explorer-output/footer.md.)
+  4. For each link, click it and verify the destination page loads successfully (no 404 or other error page), then navigate back to the homepage
+Expected Result: Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. Clicking each link successfully loads its destination page with no 404 or other error.
 Linked Requirement: None
 
 ---

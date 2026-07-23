@@ -12,9 +12,10 @@
     "steps": [
       "Scroll to the footer navigation menu",
       "Count the number of navigation links displayed",
-      "For each link, read its visible label text and its href attribute"
+      "For each link, read its visible label text and its href attribute",
+      "For each link, click it and verify the destination page loads successfully (no 404 or other error page), then navigate back to the homepage"
     ],
-    "expected_result": "Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. (Destination page load is out of scope for this suite.)",
+    "expected_result": "Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. Clicking each link successfully loads its destination page with no 404 or other error.",
     "linked_requirement": "None"
   },
   {
