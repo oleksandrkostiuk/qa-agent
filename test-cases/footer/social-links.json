@@ -1,0 +1,74 @@
+[
+  {
+    "id": "TC-FOOTER-SOCIAL-001",
+    "title": "Verify Instagram footer icon opens in a new tab with secure rel attributes",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["security", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"icon_label": "Instagram"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the Instagram icon link",
+      "Read its href, target, and rel attributes"
+    ],
+    "expected_result": "Instagram link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". (Destination page load is out of scope for this suite.)",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-002",
+    "title": "Verify LinkedIn footer icon opens in a new tab with secure rel attributes",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["security", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"icon_label": "LinkedIn"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the LinkedIn icon link",
+      "Read its href, target, and rel attributes"
+    ],
+    "expected_result": "LinkedIn link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". (Destination page load is out of scope for this suite.)",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-003",
+    "title": "Verify Facebook footer icon opens in a new tab with secure rel attributes",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["security", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"icon_label": "Facebook"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the Facebook icon link",
+      "Read its href, target, and rel attributes"
+    ],
+    "expected_result": "Facebook link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". (Destination page load is out of scope for this suite.)",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-004",
+    "title": "Verify YouTube footer icon opens in a new tab with secure rel attributes",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["security", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"icon_label": "YouTube"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the YouTube icon link",
+      "Read its href, target, and rel attributes"
+    ],
+    "expected_result": "YouTube link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". (Destination page load is out of scope for this suite.)",
+    "linked_requirement": "None"
+  }
+]
