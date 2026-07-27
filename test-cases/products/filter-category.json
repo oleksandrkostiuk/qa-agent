@@ -1,0 +1,130 @@
+[
+  {
+    "id": "TC-PRODUCTS-FILTER-001",
+    "title": "Verify selecting a single category filter returns only matching products",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "Critical",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["Products page (https://dev.skyline.glass/products/) is loaded, no filters active"],
+    "test_data": {"category": "Smart Glass", "expected_count": 3},
+    "steps": [
+      "Open the category filter checkbox list",
+      "Check the 'Smart Glass' category checkbox",
+      "Wait for the page to reload with ?product_category[]=<Smart Glass id>",
+      "Count the displayed product results"
+    ],
+    "expected_result": "Only the 3 products belonging to the 'Smart Glass' category are displayed; all other products are excluded from the result set.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-002",
+    "title": "Verify selecting multiple categories filters using OR logic (union of results)",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"categories": ["Smart Glass", "Artwork"], "expected_count": 4},
+    "steps": [
+      "Check the 'Smart Glass' category checkbox",
+      "Additionally check the 'Artwork' category checkbox",
+      "Wait for the page to reload with both category IDs in ?product_category[]=",
+      "Count the displayed product results"
+    ],
+    "expected_result": "Exactly 4 products are displayed — the union (OR) of 'Smart Glass' (3) and 'Artwork' (1) results, not their intersection.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-003",
+    "title": "Verify selected category filters float to top of the filter list with a 'Selected filters' summary",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"category": "Artwork"},
+    "steps": [
+      "Note the current position of 'Artwork' in the category checkbox list",
+      "Check the 'Artwork' category checkbox",
+      "Observe the re-ordered category list and any summary text above/below it"
+    ],
+    "expected_result": "'Artwork' moves to the top of the category checkbox list, and a 'Selected filters: Artwork' summary line is displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-004",
+    "title": "Verify filtering by a category with a unicode/emoji name returns the correct product",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "Medium",
+    "tags": ["boundary"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"category": "TEST 2. 🐶👍🔥 Modi quaerat fugiat alias distinctio.", "expected_count": 1},
+    "steps": [
+      "Locate the category checkbox with the unicode/emoji label 'TEST 2. 🐶👍🔥 Modi quaerat fugiat alias distinctio.'",
+      "Check that category checkbox",
+      "Count the displayed product results"
+    ],
+    "expected_result": "Exactly 1 product is displayed — the single product belonging to that unicode/emoji-named category. The category label renders correctly (no mojibake/broken characters).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-005",
+    "title": "Verify deselecting an active category filter removes it and updates the results",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded with 'Smart Glass' category filter already active (3 products shown)"],
+    "test_data": {"category": "Smart Glass"},
+    "steps": [
+      "Uncheck the already-selected 'Smart Glass' category checkbox",
+      "Wait for the page to reload without the category param",
+      "Count the displayed product results"
+    ],
+    "expected_result": "The 'Smart Glass' filter is removed, the 'Selected filters' summary no longer lists it, and all 19 products are displayed again.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-006",
+    "title": "Verify category filter selection persists across browser back-navigation after opening a product",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"category": "Smart Glass"},
+    "steps": [
+      "Check the 'Smart Glass' category checkbox and wait for the filtered results",
+      "Click on one of the filtered product cards to open its detail page",
+      "Use the browser Back button to return to the products page"
+    ],
+    "expected_result": "The products page reloads with the 'Smart Glass' filter still active — the same 3 filtered products are shown, not the full unfiltered list.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-FILTER-007",
+    "title": "Verify filtering via a manually edited URL with a non-existent category ID is handled gracefully",
+    "type": "UI",
+    "feature": "products",
+    "flow": "filter-category",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["None (direct URL navigation)"],
+    "test_data": {"url": "https://dev.skyline.glass/products/?product_category[]=999999"},
+    "steps": [
+      "Navigate directly to https://dev.skyline.glass/products/?product_category[]=999999",
+      "Observe the page response and product results",
+      "Check the browser console/network tab for errors"
+    ],
+    "expected_result": "Page loads without a 500 error or crash, and shows either 'No results found' or the full unfiltered list — never a broken page or exposed server error.",
+    "linked_requirement": "None"
+  }
+]
