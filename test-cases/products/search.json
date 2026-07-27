@@ -1,0 +1,145 @@
+[
+  {
+    "id": "TC-PRODUCTS-SEARCH-001",
+    "title": "Verify generic keyword search returns the full unfiltered product list (documented baseline)",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Medium",
+    "tags": ["smoke", "UI"],
+    "preconditions": ["Products page (https://dev.skyline.glass/products/) is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "glass", "baseline_total_products": 19},
+    "steps": [
+      "Click the product search box",
+      "Type 'glass' and submit the search (results load at ?keyw=glass)",
+      "Count the number of product results displayed"
+    ],
+    "expected_result": "All 19 products are returned unfiltered — a generic/common search term does not narrow the result set. This is documented current baseline behavior (see explorer-output/products.md OPEN RISKS — search relevance logic unconfirmed, flagged for further investigation), not asserted as ideal relevance matching.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-002",
+    "title": "Verify search for a specific unique product name returns the documented baseline result (unrelated products, not an exact match)",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "High",
+    "tags": ["negative", "UI"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "Vitracolor"},
+    "steps": [
+      "Click the product search box",
+      "Type 'Vitracolor' and submit the search (?keyw=Vitracolor)",
+      "Review the returned product list against the expected single 'Vitracolor' product"
+    ],
+    "expected_result": "The search returns 5 products, none of which is the exact 'Vitracolor' product a user would expect from a unique-name query. This is documented baseline — search relevance logic unconfirmed, flagged for further investigation. Do not treat this result as a pass implying accurate relevance matching; it documents current (likely incorrect) behavior for tracking, and should be raised to the product/dev team outside this test suite.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-003",
+    "title": "Verify search for a nonexistent/gibberish term shows 'No results found'",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Medium",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "zzznonexistentproduct123"},
+    "steps": [
+      "Click the product search box",
+      "Type 'zzznonexistentproduct123' and submit the search"
+    ],
+    "expected_result": "Page displays 'No results found' (or equivalent empty-state message), with zero product cards rendered and no console errors.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-004",
+    "title": "Verify empty search query returns the full unfiltered product list",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"search_keyword": ""},
+    "steps": [
+      "Click the product search box without typing anything",
+      "Submit the empty search",
+      "Count the number of product results displayed"
+    ],
+    "expected_result": "All 19 products are displayed — an empty query is treated identically to no search filter at all.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-005",
+    "title": "Verify a script-injection (XSS) payload in the search box is safely neutralized",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Critical",
+    "tags": ["security", "negative"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "<script>alert(1)</script>"},
+    "steps": [
+      "Click the product search box",
+      "Type '<script>alert(1)</script>' and submit the search",
+      "Check the DOM for reflected/unescaped script content and check the browser console for errors or executed alerts"
+    ],
+    "expected_result": "No script executes (no alert dialog appears), the payload is not reflected unescaped anywhere in the DOM, no console errors are logged, and the page resolves to 'No results found'.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-006",
+    "title": "Verify a SQL-injection-style payload in the search box does not break the page or expose errors",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "High",
+    "tags": ["security", "negative"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "' OR '1'='1"},
+    "steps": [
+      "Click the product search box",
+      "Type ''' OR '1'='1' and submit the search",
+      "Observe the page response and check the browser console/network tab for server errors (500s) or stack traces"
+    ],
+    "expected_result": "Page loads normally (no 500 error, no exposed stack trace or database error message), and shows either 'No results found' or an unfiltered/partial result set — but never raw error output.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-007",
+    "title": "Verify a whitespace-only search query behaves the same as an empty query",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["Products page is loaded, no filters active"],
+    "test_data": {"search_keyword": "   "},
+    "steps": [
+      "Click the product search box",
+      "Type three space characters only and submit the search",
+      "Count the number of product results displayed"
+    ],
+    "expected_result": "All 19 products are displayed, identical to the empty-query behavior (TC-PRODUCTS-SEARCH-004) — whitespace is not treated as a meaningful filter term.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-SEARCH-008",
+    "title": "Verify an excessively long search input does not crash or error the page",
+    "type": "UI",
+    "feature": "products",
+    "flow": "search",
+    "priority": "Medium",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "glass repeated 60 times (~300 characters)"},
+    "steps": [
+      "Click the product search box",
+      "Paste a 300-character string and submit the search",
+      "Observe page load and console for errors"
+    ],
+    "expected_result": "Page loads without crashing, freezing, or throwing console/network errors; result set is either empty ('No results found') or a valid product list — never a broken/blank page.",
+    "linked_requirement": "None"
+  }
+]
