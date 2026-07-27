@@ -1,0 +1,73 @@
+[
+  {
+    "id": "TC-PRODUCTS-OPEN-001",
+    "title": "Verify clicking a product card from the unfiltered listing opens a valid product detail page",
+    "type": "UI",
+    "feature": "products",
+    "flow": "open-product",
+    "priority": "Critical",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"card": "first product card in the unfiltered listing"},
+    "steps": [
+      "Click the first product card in the listing",
+      "Wait for navigation to complete"
+    ],
+    "expected_result": "A valid product detail page opens (no 404, no blank page, no console errors); the page content corresponds to the clicked product (matching product name/title).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-OPEN-002",
+    "title": "Verify clicking a product card from filtered results opens the correct product's detail page",
+    "type": "UI",
+    "feature": "products",
+    "flow": "open-product",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded with 'Smart Glass' category filter active (3 products shown)"],
+    "test_data": {"category": "Smart Glass"},
+    "steps": [
+      "Check the 'Smart Glass' category checkbox and wait for the filtered results",
+      "Note the name of one of the filtered product cards",
+      "Click that product card"
+    ],
+    "expected_result": "The product detail page that opens matches the exact product that was clicked (name/title on the detail page matches the card noted in step 2), not a different product from the unfiltered set.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-OPEN-003",
+    "title": "Verify navigating back from a product detail page opened via search results returns to the products page with the search query preserved",
+    "type": "UI",
+    "feature": "products",
+    "flow": "open-product",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {"search_keyword": "glass"},
+    "steps": [
+      "Search for 'glass' and wait for results to load",
+      "Click on one of the returned product cards to open its detail page",
+      "Use the browser Back button to return to the products page"
+    ],
+    "expected_result": "The products page reloads with the 'glass' search query still active in the URL (?keyw=glass) and the same search result set displayed, not a reset to the full unfiltered list.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-OPEN-004",
+    "title": "Verify directly navigating to a non-existent product detail URL shows an appropriate not-found state instead of crashing",
+    "type": "UI",
+    "feature": "products",
+    "flow": "open-product",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["None (direct URL navigation)"],
+    "test_data": {"url": "https://dev.skyline.glass/product/this-product-does-not-exist-xyz/"},
+    "steps": [
+      "Navigate directly to https://dev.skyline.glass/product/this-product-does-not-exist-xyz/",
+      "Observe the page response",
+      "Check the browser console/network tab for a 500 error or unhandled exception"
+    ],
+    "expected_result": "Page shows a proper 404/not-found state (or a graceful redirect to a valid page), with no 500 error, no unhandled exception, and no blank/broken page.",
+    "linked_requirement": "None"
+  }
+]

@@ -1,0 +1,57 @@
+[
+  {
+    "id": "TC-PRODUCTS-RESET-001",
+    "title": "Verify 'Reset filters' link clears all selected category filters and returns to the unfiltered product list",
+    "type": "UI",
+    "feature": "products",
+    "flow": "reset-filters",
+    "priority": "High",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["Products page is loaded with at least one category filter active"],
+    "test_data": {"category": "Smart Glass"},
+    "steps": [
+      "Check the 'Smart Glass' category checkbox and confirm the filtered result count (3 products)",
+      "Click the 'Reset filters' link",
+      "Observe the resulting URL and product list"
+    ],
+    "expected_result": "The page navigates back to the plain https://dev.skyline.glass/products/ URL with no query params, the category checkbox is unchecked, the 'Selected filters' summary is gone, and all 19 products are displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-RESET-002",
+    "title": "Verify 'Reset filters' clears both an active category filter and an active search query together",
+    "type": "UI",
+    "feature": "products",
+    "flow": "reset-filters",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": ["Products page is loaded with a category filter and a search query both active"],
+    "test_data": {"category": "Smart Glass", "search_keyword": "glass"},
+    "steps": [
+      "Check the 'Smart Glass' category checkbox",
+      "Additionally enter 'glass' in the search box and submit",
+      "Click the 'Reset filters' link",
+      "Observe the resulting URL and product list"
+    ],
+    "expected_result": "The page returns to the plain https://dev.skyline.glass/products/ URL with no ?keyw= or ?product_category[]= params of any kind, and all 19 products are displayed unfiltered.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-PRODUCTS-RESET-003",
+    "title": "Verify 'Reset filters' link is a no-op when clicked with no active filters or search",
+    "type": "UI",
+    "feature": "products",
+    "flow": "reset-filters",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["Products page is loaded, no filters or search query active"],
+    "test_data": {},
+    "steps": [
+      "Confirm no category filter is checked and the search box is empty",
+      "Click the 'Reset filters' link",
+      "Observe the resulting URL and product list"
+    ],
+    "expected_result": "Page remains at (or reloads to) the plain https://dev.skyline.glass/products/ URL with all 19 products displayed, no console errors, and no unexpected state change.",
+    "linked_requirement": "None"
+  }
+]
