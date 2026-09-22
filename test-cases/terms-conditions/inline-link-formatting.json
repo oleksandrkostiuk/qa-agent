@@ -1,0 +1,58 @@
+[
+  {
+    "id": "TC-TERMS-LINKS-001",
+    "title": "Verify inline \"SKYLINE DESIGN PRIVACY POLICY\" link is visually distinguishable from surrounding body text",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "inline-link-formatting",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page (https://dev.skyline.glass/terms-conditions/) is loaded"],
+    "test_data": {"link_text": "SKYLINE DESIGN PRIVACY POLICY"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Locate the paragraph containing the inline \"SKYLINE DESIGN PRIVACY POLICY\" link",
+      "Compare the link's color/underline styling against the surrounding body text"
+    ],
+    "expected_result": "The inline link is visually distinguishable from surrounding body text (e.g. distinct color and/or underline), so a user can clearly identify it as clickable.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-LINKS-002",
+    "title": "Verify inline \"SKYLINE DESIGN PRIVACY POLICY\" link points to the correct external URL",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "inline-link-formatting",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"link_text": "SKYLINE DESIGN PRIVACY POLICY"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Locate the inline \"SKYLINE DESIGN PRIVACY POLICY\" link",
+      "Read its href attribute",
+      "Click the link and verify the destination page loads successfully"
+    ],
+    "expected_result": "The link's href points to the correct Privacy Policy destination and clicking it loads that page successfully, with no 404 or other error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-LINKS-003",
+    "title": "Verify inline link hover/focus state is visually indicated",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "inline-link-formatting",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"link_text": "SKYLINE DESIGN PRIVACY POLICY"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Locate the inline \"SKYLINE DESIGN PRIVACY POLICY\" link",
+      "Hover over the link with the mouse and observe any style change",
+      "Tab to the link via keyboard and observe the focus indicator"
+    ],
+    "expected_result": "A visible style change occurs on hover (e.g. color change or underline toggle) and a visible focus indicator (e.g. outline) appears when the link receives keyboard focus.",
+    "linked_requirement": "None"
+  }
+]
