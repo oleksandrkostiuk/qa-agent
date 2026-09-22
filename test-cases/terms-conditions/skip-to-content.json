@@ -1,0 +1,54 @@
+[
+  {
+    "id": "TC-TERMS-SKIPLINK-001",
+    "title": "Verify \"Skip to content\" link is visually hidden by default",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "skip-to-content",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page (https://dev.skyline.glass/terms-conditions/) is loaded, no keyboard interaction yet"],
+    "test_data": {},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Without interacting via keyboard, inspect the top of the page for a visible \"Skip to content\" link"
+    ],
+    "expected_result": "The \"Skip to content\" link is not visibly rendered on the page before any keyboard interaction (e.g. positioned off-screen or visually hidden).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-SKIPLINK-002",
+    "title": "Verify \"Skip to content\" link becomes visible on keyboard focus",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "skip-to-content",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Press Tab once to move keyboard focus to the first focusable element"
+    ],
+    "expected_result": "The \"Skip to content\" link becomes visible on-screen with a clear focus indicator as soon as it receives keyboard focus.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-SKIPLINK-003",
+    "title": "Verify activating \"Skip to content\" link moves focus to the main content area",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "skip-to-content",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded, \"Skip to content\" link is focused"],
+    "test_data": {},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Press Tab to focus the \"Skip to content\" link",
+      "Press Enter to activate it"
+    ],
+    "expected_result": "Keyboard focus and page scroll position move to the main content area (past the header/nav), and the link itself returns to its hidden state.",
+    "linked_requirement": "None"
+  }
+]

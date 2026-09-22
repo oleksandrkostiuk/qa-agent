@@ -1,0 +1,74 @@
+[
+  {
+    "id": "TC-TERMS-NUMBERING-001",
+    "title": "Verify Section 11 three-level nested numbering (numeric → alpha → roman) renders with correct visual nesting",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "nested-numbering",
+    "priority": "Medium",
+    "tags": ["UI", "boundary"],
+    "preconditions": ["Terms & Conditions page (https://dev.skyline.glass/terms-conditions/) is loaded"],
+    "test_data": {"numbering": "numeric (1-11) -> alpha (a-e) -> roman (i-v)"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Scroll to Section 11",
+      "Inspect the numeric top-level item, its alpha sub-items (a-e), and the roman-numeral sub-items (i-v) nested under item 11.b",
+      "Compare indentation levels between the numeric, alpha, and roman tiers"
+    ],
+    "expected_result": "All three numbering tiers (numeric, alpha, roman) render with visually distinct, progressively increasing indentation - the nesting is preserved, not flattened to a single visual level.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-NUMBERING-002",
+    "title": "Verify top-level numeric section list (1-11) is sequential with no gaps or duplicates",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "nested-numbering",
+    "priority": "Medium",
+    "tags": ["UI", "boundary"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"section_range": "1-11"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Scroll through the full document, noting each top-level section number as it renders"
+    ],
+    "expected_result": "Section numbers render sequentially from 1 to 11 with no skipped, repeated, or misrendered numbers.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-NUMBERING-003",
+    "title": "Verify alpha sub-list (a-e) indentation is visually distinct from its parent numeric item",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "nested-numbering",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"section": "11", "alpha_items": "a-e"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Scroll to Section 11",
+      "Inspect the left-indentation of alpha items (a-e) relative to the numeric parent item (11)"
+    ],
+    "expected_result": "Alpha sub-items are indented further right than the parent numeric item, with consistent indentation across all five alpha items (a-e).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-NUMBERING-004",
+    "title": "Verify roman numeral sub-list (i-v) indentation is visually distinct from its parent alpha item",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "nested-numbering",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"section": "11.b", "roman_items": "i-v"},
+    "steps": [
+      "Open the Terms & Conditions page",
+      "Scroll to Section 11.b",
+      "Inspect the left-indentation of roman numeral items (i-v) relative to the parent alpha item (b)"
+    ],
+    "expected_result": "Roman numeral sub-items are indented further right than the parent alpha item, with consistent indentation across all five roman items (i-v).",
+    "linked_requirement": "None"
+  }
+]
