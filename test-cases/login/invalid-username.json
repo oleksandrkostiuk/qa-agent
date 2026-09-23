@@ -1,0 +1,40 @@
+[
+  {
+    "id": "TC-LOGIN-INVALIDUSER-001",
+    "title": "Login fails with an unregistered username",
+    "type": "UI",
+    "feature": "login",
+    "flow": "invalid-username",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "invalidUser123", "password": "SuperSecretPassword!"},
+    "steps": [
+      "Navigate to /login",
+      "Enter \"invalidUser123\" in the Username field",
+      "Enter \"SuperSecretPassword!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected, the page remains on /login, and an error flash message \"Your username is invalid!\" is displayed. No session cookie is set.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-INVALIDUSER-002",
+    "title": "Username is validated before password when both are invalid",
+    "type": "UI",
+    "feature": "login",
+    "flow": "invalid-username",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "wronguser", "password": "wrongpass"},
+    "steps": [
+      "Navigate to /login",
+      "Enter \"wronguser\" in the Username field",
+      "Enter \"wrongpass\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "The error flash message shown is \"Your username is invalid!\" (not a password error), confirming the username is validated before the password server-side.",
+    "linked_requirement": "None"
+  }
+]
