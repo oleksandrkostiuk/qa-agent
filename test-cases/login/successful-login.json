@@ -10,17 +10,17 @@
     "preconditions": ["User is not logged in", "A valid account exists (username: tomsmith, password: SuperSecretPassword!)"],
     "test_data": {"username": "tomsmith", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"tomsmith\" in the Username field",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
     ],
-    "expected_result": "User is redirected to /secure, a success flash message \"You logged into a secure area!\" is displayed, and the Logout button is visible.",
+    "expected_result": "User is redirected to https://the-internet.herokuapp.com/secure, a success flash message \"You logged into a secure area!\" is displayed, and the Logout button is visible.",
     "linked_requirement": "None"
   },
   {
     "id": "TC-LOGIN-SUCCESS-002",
-    "title": "Authenticated session persists on direct navigation to /secure",
+    "title": "Authenticated session persists on direct navigation to https://the-internet.herokuapp.com/secure",
     "type": "UI",
     "feature": "login",
     "flow": "successful-login",
@@ -29,10 +29,10 @@
     "preconditions": ["User has successfully logged in (see TC-LOGIN-SUCCESS-001) and the session cookie is still valid"],
     "test_data": {},
     "steps": [
-      "While logged in, navigate away from /secure (e.g. to /login)",
-      "Navigate directly to /secure via the URL bar"
+      "While logged in, navigate away from https://the-internet.herokuapp.com/secure (e.g. to https://the-internet.herokuapp.com/login)",
+      "Navigate directly to https://the-internet.herokuapp.com/secure via the URL bar"
     ],
-    "expected_result": "The /secure page loads directly without redirecting to /login; the user remains authenticated and the secure area content is shown.",
+    "expected_result": "The https://the-internet.herokuapp.com/secure page loads directly without redirecting to https://the-internet.herokuapp.com/login; the user remains authenticated and the secure area content is shown.",
     "linked_requirement": "None"
   }
 ]
