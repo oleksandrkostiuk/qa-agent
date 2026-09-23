@@ -14,7 +14,7 @@ Tags: boundary, security, negative
 Preconditions: User is not logged in
 Test Data: username = 500-character string of the letter "a", password = SuperSecretPassword!
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter a 500-character string of "a" in the Username field
   3. Enter "SuperSecretPassword!" in the Password field
   4. Click the "Login" button
@@ -32,7 +32,7 @@ Tags: security, negative, boundary
 Preconditions: User is not logged in
 Test Data: username = <script>alert(1)</script>, password = SuperSecretPassword!
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "<script>alert(1)</script>" in the Username field
   3. Enter "SuperSecretPassword!" in the Password field
   4. Click the "Login" button
@@ -50,7 +50,7 @@ Tags: security, negative, boundary
 Preconditions: User is not logged in
 Test Data: username = ' OR '1'='1, password = ' OR '1'='1
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "' OR '1'='1" in the Username field
   3. Enter "' OR '1'='1" in the Password field
   4. Click the "Login" button
@@ -68,7 +68,7 @@ Tags: boundary, negative
 Preconditions: User is not logged in
 Test Data: username = "   " (3 spaces), password = "   " (3 spaces)
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter three space characters in the Username field
   3. Enter three space characters in the Password field
   4. Click the "Login" button
@@ -86,7 +86,7 @@ Tags: boundary, negative
 Preconditions: User is not logged in
 Test Data: username = тестユーザー日本語, password = SuperSecretPassword!
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "тестユーザー日本語" in the Username field
   3. Enter "SuperSecretPassword!" in the Password field
   4. Click the "Login" button

@@ -10,7 +10,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "a-repeated-500-times", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter a 500-character string of \"a\" in the Username field",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
@@ -29,7 +29,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "<script>alert(1)</script>", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"<script>alert(1)</script>\" in the Username field",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
@@ -48,7 +48,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "' OR '1'='1", "password": "' OR '1'='1"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"' OR '1'='1\" in the Username field",
       "Enter \"' OR '1'='1\" in the Password field",
       "Click the \"Login\" button"
@@ -67,7 +67,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "   ", "password": "   "},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter three space characters in the Username field",
       "Enter three space characters in the Password field",
       "Click the \"Login\" button"
@@ -86,7 +86,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "тестユーザー日本語", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"тестユーザー日本語\" in the Username field",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
