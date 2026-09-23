@@ -10,14 +10,14 @@
     "preconditions": ["User is logged in (see TC-LOGIN-SUCCESS-001)"],
     "test_data": {},
     "steps": [
-      "From the /secure page, click the \"Logout\" button"
+      "From the https://the-internet.herokuapp.com/secure page, click the \"Logout\" button"
     ],
-    "expected_result": "User is redirected to /login, a flash message \"You logged out of the secure area!\" is displayed, and the session is ended.",
+    "expected_result": "User is redirected to https://the-internet.herokuapp.com/login, a flash message \"You logged out of the secure area!\" is displayed, and the session is ended.",
     "linked_requirement": "None"
   },
   {
     "id": "TC-LOGIN-LOGOUT-002",
-    "title": "/secure is inaccessible immediately after logout",
+    "title": "https://the-internet.herokuapp.com/secure is inaccessible immediately after logout",
     "type": "UI",
     "feature": "login",
     "flow": "logout",
@@ -26,9 +26,9 @@
     "preconditions": ["User has just logged out (see TC-LOGIN-LOGOUT-001)"],
     "test_data": {},
     "steps": [
-      "Immediately after logout, navigate directly to /secure via the URL bar"
+      "Immediately after logout, navigate directly to https://the-internet.herokuapp.com/secure via the URL bar"
     ],
-    "expected_result": "User is redirected to /login with flash message \"You must login to view the secure area!\"; the previously authenticated session is not reusable.",
+    "expected_result": "User is redirected to https://the-internet.herokuapp.com/login with flash message \"You must login to view the secure area!\"; the previously authenticated session is not reusable.",
     "linked_requirement": "None"
   }
 ]

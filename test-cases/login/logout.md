@@ -14,13 +14,13 @@ Tags: smoke, regression
 Preconditions: User is logged in (see TC-LOGIN-SUCCESS-001)
 Test Data: None
 Steps:
-  1. From the /secure page, click the "Logout" button
-Expected Result: User is redirected to /login, a flash message "You logged out of the secure area!" is displayed, and the session is ended.
+  1. From the https://the-internet.herokuapp.com/secure page, click the "Logout" button
+Expected Result: User is redirected to https://the-internet.herokuapp.com/login, a flash message "You logged out of the secure area!" is displayed, and the session is ended.
 Linked Requirement: None
 
 ---
 ID: TC-LOGIN-LOGOUT-002
-Title: /secure is inaccessible immediately after logout
+Title: https://the-internet.herokuapp.com/secure is inaccessible immediately after logout
 Type: UI
 Feature: login
 Flow: logout
@@ -29,6 +29,6 @@ Tags: negative, security
 Preconditions: User has just logged out (see TC-LOGIN-LOGOUT-001)
 Test Data: None
 Steps:
-  1. Immediately after logout, navigate directly to /secure via the URL bar
-Expected Result: User is redirected to /login with flash message "You must login to view the secure area!"; the previously authenticated session is not reusable.
+  1. Immediately after logout, navigate directly to https://the-internet.herokuapp.com/secure via the URL bar
+Expected Result: User is redirected to https://the-internet.herokuapp.com/login with flash message "You must login to view the secure area!"; the previously authenticated session is not reusable.
 Linked Requirement: None
