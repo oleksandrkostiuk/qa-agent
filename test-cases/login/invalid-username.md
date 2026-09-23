@@ -14,11 +14,11 @@ Tags: negative
 Preconditions: User is not logged in
 Test Data: username = invalidUser123, password = SuperSecretPassword!
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "invalidUser123" in the Username field
   3. Enter "SuperSecretPassword!" in the Password field
   4. Click the "Login" button
-Expected Result: Login is rejected, the page remains on /login, and an error flash message "Your username is invalid!" is displayed. No session cookie is set.
+Expected Result: Login is rejected, the page remains on https://the-internet.herokuapp.com/login, and an error flash message "Your username is invalid!" is displayed. No session cookie is set.
 Linked Requirement: None
 
 ---
@@ -32,7 +32,7 @@ Tags: negative
 Preconditions: User is not logged in
 Test Data: username = wronguser, password = wrongpass
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "wronguser" in the Username field
   3. Enter "wrongpass" in the Password field
   4. Click the "Login" button

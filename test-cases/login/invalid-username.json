@@ -10,12 +10,12 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "invalidUser123", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"invalidUser123\" in the Username field",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
     ],
-    "expected_result": "Login is rejected, the page remains on /login, and an error flash message \"Your username is invalid!\" is displayed. No session cookie is set.",
+    "expected_result": "Login is rejected, the page remains on https://the-internet.herokuapp.com/login, and an error flash message \"Your username is invalid!\" is displayed. No session cookie is set.",
     "linked_requirement": "None"
   },
   {
@@ -29,7 +29,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "wronguser", "password": "wrongpass"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"wronguser\" in the Username field",
       "Enter \"wrongpass\" in the Password field",
       "Click the \"Login\" button"
