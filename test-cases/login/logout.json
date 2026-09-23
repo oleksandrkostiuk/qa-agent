@@ -1,0 +1,34 @@
+[
+  {
+    "id": "TC-LOGIN-LOGOUT-001",
+    "title": "Logout from the secure area ends the session",
+    "type": "UI",
+    "feature": "login",
+    "flow": "logout",
+    "priority": "High",
+    "tags": ["smoke", "regression"],
+    "preconditions": ["User is logged in (see TC-LOGIN-SUCCESS-001)"],
+    "test_data": {},
+    "steps": [
+      "From the /secure page, click the \"Logout\" button"
+    ],
+    "expected_result": "User is redirected to /login, a flash message \"You logged out of the secure area!\" is displayed, and the session is ended.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-LOGOUT-002",
+    "title": "/secure is inaccessible immediately after logout",
+    "type": "UI",
+    "feature": "login",
+    "flow": "logout",
+    "priority": "Medium",
+    "tags": ["negative", "security"],
+    "preconditions": ["User has just logged out (see TC-LOGIN-LOGOUT-001)"],
+    "test_data": {},
+    "steps": [
+      "Immediately after logout, navigate directly to /secure via the URL bar"
+    ],
+    "expected_result": "User is redirected to /login with flash message \"You must login to view the secure area!\"; the previously authenticated session is not reusable.",
+    "linked_requirement": "None"
+  }
+]
