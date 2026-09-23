@@ -14,7 +14,7 @@ Tags: negative, boundary
 Preconditions: User is not logged in
 Test Data: username = "" (empty), password = SuperSecretPassword!
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Leave the Username field empty
   3. Enter "SuperSecretPassword!" in the Password field
   4. Click the "Login" button
@@ -32,7 +32,7 @@ Tags: negative, boundary
 Preconditions: User is not logged in
 Test Data: username = tomsmith, password = "" (empty)
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Enter "tomsmith" in the Username field
   3. Leave the Password field empty
   4. Click the "Login" button
@@ -50,7 +50,7 @@ Tags: negative, boundary
 Preconditions: User is not logged in
 Test Data: username = "" (empty), password = "" (empty)
 Steps:
-  1. Navigate to /login
+  1. Navigate to https://the-internet.herokuapp.com/login
   2. Leave the Username field empty
   3. Leave the Password field empty
   4. Click the "Login" button

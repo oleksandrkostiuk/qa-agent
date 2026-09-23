@@ -10,7 +10,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "", "password": "SuperSecretPassword!"},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Leave the Username field empty",
       "Enter \"SuperSecretPassword!\" in the Password field",
       "Click the \"Login\" button"
@@ -29,7 +29,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "tomsmith", "password": ""},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Enter \"tomsmith\" in the Username field",
       "Leave the Password field empty",
       "Click the \"Login\" button"
@@ -48,7 +48,7 @@
     "preconditions": ["User is not logged in"],
     "test_data": {"username": "", "password": ""},
     "steps": [
-      "Navigate to /login",
+      "Navigate to https://the-internet.herokuapp.com/login",
       "Leave the Username field empty",
       "Leave the Password field empty",
       "Click the \"Login\" button"
