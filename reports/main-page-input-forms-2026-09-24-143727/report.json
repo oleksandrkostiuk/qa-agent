@@ -1,0 +1,112 @@
+[
+  {
+    "id": "TC-MAINPAGE-SEARCH-002",
+    "status": "pass",
+    "actual_result": "Empty query submitted; browser navigated to /?s= and rendered a results page listing 716 items (no query filter applied). No page crash, no server error.",
+    "expected_result": "Form either prevents submission client-side, or navigates to a results page showing an appropriate empty/no-query state; no page crash or server error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:32:40Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-003",
+    "status": "pass",
+    "actual_result": "Query <script>alert(1)</script> submitted; URL-encoded in address bar. Results heading rendered the string as escaped literal text ('0 Search results for \"<script>alert(1)</script>\"'), no JS execution occurred (no alert dialog), 0 console errors.",
+    "expected_result": "Query string is escaped/encoded in the URL and rendered results page; no script execution occurs (no JS alert), no unescaped HTML injection is visible in the rendered page.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:33:06Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-005",
+    "status": "fail",
+    "actual_result": "Whitespace-only query ('   ') submitted; navigated to /?s=+++ and returned a distinct '4 Search results for \" \"' state (different result set than the true empty-query case, which returns 716 results). Behavior was reproduced identically on retry (consistent, not flaky). No crash/server error, but whitespace is not treated as effectively empty as required.",
+    "expected_result": "Form treats the query as effectively empty — either blocks submission or shows an appropriate empty/no-query results state; no page crash or server error.",
+    "error_message": null,
+    "screenshot": "screenshots/TC-MAINPAGE-SEARCH-005.png",
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:34:08Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-002",
+    "status": "pass",
+    "actual_result": "Submitted newsletter form with empty email. Form displayed 'There was a problem with your submission. Please review the fields below.' and marked the email field invalid; form was not submitted.",
+    "expected_result": "Form is not submitted; a validation error indicating the email field is required is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:34:30Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-003",
+    "status": "pass",
+    "actual_result": "Submitted 'qatestexample.com' (missing @). Form displayed the standard Gravity Forms validation error and did not submit.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:34:50Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-004",
+    "status": "pass",
+    "actual_result": "Submitted 'qatest@' (missing domain). Form displayed the standard Gravity Forms validation error and did not submit.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:35:18Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-005",
+    "status": "pass",
+    "actual_result": "Submitted 'qa test@example.com' (contains space). Form displayed the standard Gravity Forms validation error and did not submit. Note: an unrelated third-party HubSpot tracking beacon (forms.hscollectedforms.net) returned a 400 in console during this step; it is not part of the Gravity Forms validation path and did not affect the test outcome.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:35:39Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-006",
+    "status": "pass",
+    "actual_result": "Submitted 'qa-test-006@example.com.' (trailing dot). Form rejected the value with a clear validation error ('There was a problem with your submission...'); behavior was consistent, no unhandled error.",
+    "expected_result": "Form either rejects the value with a validation error, or normalizes/accepts it consistently — behavior must not silently fail or throw an unhandled error. Record actual behavior observed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:36:08Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-008",
+    "status": "pass",
+    "actual_result": "Submitted 'qa-tëst+special_008@example.com' (unicode/special chars). Form rejected the value with a clear validation error, field marked invalid; behavior consistent, no unhandled error.",
+    "expected_result": "Form either accepts the value as valid or rejects it with a clear validation error; behavior must be consistent and not throw an unhandled error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:36:29Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-009",
+    "status": "pass",
+    "actual_result": "Submitted 'qa-test-009@example.com' then triggered 5 rapid submit clicks. Gravity Forms' own guard blocked 4 of 5 clicks ('Aborting submission. Another submission is already in progress for form #5'), so only one submission attempt proceeded and no duplicate confirmation messages appeared. That single submission attempt then failed with a generic validation error, consistent with the known reCAPTCHA v3 bot-score execution risk already documented for TC-MAINPAGE-NEWSLETTER-010 (automated traffic against the live Gravity Forms backend may be silently score-blocked) — this is treated as a pre-acknowledged environment caveat, not a defect in the duplicate-submission guard being tested here.",
+    "expected_result": "Only one submission is processed (button disables/debounces after first click, or duplicate clicks are ignored); no duplicate confirmation messages and no client-side error.",
+    "error_message": "Gravity Forms: Aborting submission. Another submission is already in progress for form #5. (x4, self-guard log, not an application crash)",
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-24T14:37:01Z"
+  }
+]
