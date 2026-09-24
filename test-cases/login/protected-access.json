@@ -1,0 +1,18 @@
+[
+  {
+    "id": "TC-LOGIN-PROTECTED-001",
+    "title": "Unauthenticated direct access to https://the-internet.herokuapp.com/secure redirects to login",
+    "type": "UI",
+    "feature": "login",
+    "flow": "protected-access",
+    "priority": "Critical",
+    "tags": ["security", "regression"],
+    "preconditions": ["No active session (no login cookie set / fresh browser context)"],
+    "test_data": {},
+    "steps": [
+      "Without logging in, navigate directly to https://the-internet.herokuapp.com/secure via the URL bar"
+    ],
+    "expected_result": "User is redirected to https://the-internet.herokuapp.com/login and a flash message \"You must login to view the secure area!\" is displayed. The secure area content is never shown.",
+    "linked_requirement": "None"
+  }
+]
