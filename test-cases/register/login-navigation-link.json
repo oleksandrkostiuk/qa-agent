@@ -1,0 +1,19 @@
+[
+  {
+    "id": "TC-REGISTER-LOGINNAV-001",
+    "title": "\"Already Registered? Login\" link navigates to the login page",
+    "type": "UI",
+    "feature": "register",
+    "flow": "login-navigation-link",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {},
+    "steps": [
+      "Navigate to the register page",
+      "Click the \"Already Registered? Login\" link"
+    ],
+    "expected_result": "The app navigates to the /login page.",
+    "linked_requirement": "None"
+  }
+]
