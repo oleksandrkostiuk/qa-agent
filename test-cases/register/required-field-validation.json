@@ -1,0 +1,157 @@
+[
+  {
+    "id": "TC-REGISTER-REQUIRED-001",
+    "title": "Submitting with First Name empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "",
+      "lastName": "Tester",
+      "userName": "qa_required_001",
+      "password": "Passw0rd1",
+      "confirmPassword": "Passw0rd1",
+      "gender": "Male"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave the First Name field empty",
+      "Fill all other fields with valid data and select a gender",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; the exact client-side message \"First Name is required\" is displayed under the First Name field; no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-REQUIRED-002",
+    "title": "Submitting with Last Name empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "",
+      "userName": "qa_required_002",
+      "password": "Passw0rd1",
+      "confirmPassword": "Passw0rd1",
+      "gender": "Male"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave the Last Name field empty",
+      "Fill all other fields with valid data and select a gender",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; the exact client-side message \"Last Name is required\" is displayed under the Last Name field; no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-REQUIRED-003",
+    "title": "Submitting with User Name empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "userName": "",
+      "password": "Passw0rd1",
+      "confirmPassword": "Passw0rd1",
+      "gender": "Male"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave the User Name field empty",
+      "Fill all other fields with valid data and select a gender",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; the exact client-side message \"User Name is required\" is displayed under the User Name field; no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-REQUIRED-004",
+    "title": "Submitting with Password empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "userName": "qa_required_004",
+      "password": "",
+      "confirmPassword": "Passw0rd1",
+      "gender": "Male"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave the Password field empty",
+      "Fill all other fields with valid data and select a gender",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; the exact client-side message \"Password is required\" is displayed under the Password field; no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-REQUIRED-005",
+    "title": "Submitting with Confirm Password empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "userName": "qa_required_005",
+      "password": "Passw0rd1",
+      "confirmPassword": "",
+      "gender": "Male"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave the Confirm Password field empty",
+      "Fill all other fields with valid data and select a gender",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; the exact client-side message \"Password is required\" is displayed under the Confirm Password field (verbatim - the app reuses the same message text for both Password and Confirm Password); no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-REQUIRED-006",
+    "title": "Submitting with all required fields empty is rejected",
+    "type": "UI",
+    "feature": "register",
+    "flow": "required-field-validation",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "",
+      "lastName": "",
+      "userName": "",
+      "password": "",
+      "confirmPassword": "",
+      "gender": null
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Leave all fields empty and gender unselected",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "Form is not submitted; all applicable required-field messages are displayed simultaneously - \"First Name is required\", \"Last Name is required\", \"User Name is required\", \"Password is required\" (shown once under Password and once under Confirm Password); no POST /api/user/ request fires.",
+    "linked_requirement": "None"
+  }
+]
