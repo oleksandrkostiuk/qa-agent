@@ -1,0 +1,19 @@
+[
+  {
+    "id": "TC-BOOKCARTLOGIN-REGISTERNAV-001",
+    "title": "\"New User? Register\" link navigates to the register page",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "register-navigation-link",
+    "priority": "Low",
+    "tags": ["UI"],
+    "preconditions": ["Anonymous user on the login page (bookcart environment)"],
+    "test_data": {},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Click the \"New User? Register\" link"
+    ],
+    "expected_result": "The app navigates to the /register page.",
+    "linked_requirement": "None"
+  }
+]
