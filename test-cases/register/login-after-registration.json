@@ -1,0 +1,67 @@
+[
+  {
+    "id": "TC-REGISTER-POSTLOGIN-001",
+    "title": "Logging in immediately after registration succeeds with the same credentials",
+    "type": "UI",
+    "feature": "register",
+    "flow": "login-after-registration",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["A new account was just registered successfully (e.g. via TC-REGISTER-MALE-001) and the app has redirected to /login; the registered userName/password are known"],
+    "test_data": {
+      "userName": "<the username used in the preceding successful registration>",
+      "password": "Passw0rd1"
+    },
+    "steps": [
+      "On the /login page, enter the just-registered userName",
+      "Enter the matching password",
+      "Click the Login/Submit button"
+    ],
+    "expected_result": "Login succeeds and the user reaches an authenticated/logged-in state (the newly created account can actually authenticate - this is not just a UI redirect assumption).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-POSTLOGIN-002",
+    "title": "API - login with freshly-registered credentials returns a token",
+    "type": "API",
+    "feature": "register",
+    "flow": "login-after-registration",
+    "priority": "High",
+    "tags": ["regression"],
+    "preconditions": ["A new account was just registered via POST /api/user/ (e.g. the userName/password from TC-REGISTER-MALE-001)"],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login/",
+      "headers": { "Content-Type": "application/json" },
+      "body": { "userName": "<the username used in the preceding successful registration>", "password": "Passw0rd1" },
+      "expected_status": 200
+    },
+    "steps": [
+      "Send POST /api/login/ with the freshly-registered userName and correct password"
+    ],
+    "expected_result": "Response status is 200; response body contains a \"token\" field and a \"userDetails\" object with \"userId\" and \"username\" matching the registered account.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-POSTLOGIN-003",
+    "title": "API - login with correct username but wrong password is rejected",
+    "type": "API",
+    "feature": "register",
+    "flow": "login-after-registration",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["A new account was just registered via POST /api/user/ (e.g. the userName from TC-REGISTER-MALE-001)"],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login/",
+      "headers": { "Content-Type": "application/json" },
+      "body": { "userName": "<the username used in the preceding successful registration>", "password": "WrongPassword1" },
+      "expected_status": 401
+    },
+    "steps": [
+      "Send POST /api/login/ with the freshly-registered userName and an incorrect password"
+    ],
+    "expected_result": "Response status is 401; response body is empty.",
+    "linked_requirement": "None"
+  }
+]
