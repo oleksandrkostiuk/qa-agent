@@ -1,0 +1,13 @@
+[
+  {
+    "id": "TC-FOOTER-NAV-001",
+    "status": "pass",
+    "actual_result": "Footer navigation menu displays exactly 15 links (Home, Products, Collections, Patterns, Projects, About, History, Sustainability, Design Partners, News, Request a Sample, Request a Quote, Careers, Resources, Contact), each with non-empty label text and a non-empty href. Each link was navigated to directly and loaded its destination page successfully with a valid page title and no console errors — no 404 or error page encountered on any of the 15 destinations.",
+    "expected_result": "Exactly 15 navigation links are displayed. Each link has non-empty, readable label text and a non-empty, valid href attribute. Clicking each link successfully loads its destination page with no 404 or other error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-07-23T17:23:17Z"
+  }
+]
