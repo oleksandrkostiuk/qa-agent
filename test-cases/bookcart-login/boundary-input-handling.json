@@ -1,0 +1,120 @@
+[
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-001",
+    "title": "Login form accepts a very long (2000-character) username without client-side truncation or error",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": ["User is not logged in", "No maxLength, pattern, or native required HTML attributes exist on the username/password inputs (Angular reactive-form validation only, confirmed via DOM query)"],
+    "test_data": {"username": "a (repeated 2000 times)", "password": "SomePassword123"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter a 2000-character string into the Username field",
+      "Enter \"SomePassword123\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "No client-side length validation blocks submission or truncates the input. A POST /api/login request is sent. The server responds 401 (treated as invalid credentials, not a request error). No visible error message appears on the page; the user remains on /login.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-002",
+    "title": "Login form accepts a whitespace-only username without client-side validation",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "   ", "password": "SomePassword123"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter \"   \" (three spaces, no other characters) into the Username field",
+      "Enter \"SomePassword123\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Whitespace-only input is not treated as 'empty' by the form's required validator, so no client-side 'Username is required' message appears. A POST /api/login request is sent. The server responds 401. The user remains on /login with no visible feedback.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-003",
+    "title": "POST /api/login with an empty JSON body returns 401, not 400",
+    "type": "API",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "body": {},
+      "expected_status": 401
+    },
+    "steps": ["Send the request described in Test Data to the resolved environment's base URL"],
+    "expected_result": "Response status is 401 (the API does not distinguish a malformed/empty request from wrong credentials; it never returns 400 for this input). Response body is empty.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-004",
+    "title": "POST /api/login with empty string username and password returns 401",
+    "type": "API",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "body": {"username": "", "password": ""},
+      "expected_status": 401
+    },
+    "steps": ["Send the request described in Test Data to the resolved environment's base URL"],
+    "expected_result": "Response status is 401. Response body is empty.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-005",
+    "title": "POST /api/login with a 2000-character username returns 401, not a request-size error",
+    "type": "API",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "body": {"username": "<2000-character string of 'a'>", "password": "SomePassword123"},
+      "expected_status": 401
+    },
+    "steps": ["Send the request described in Test Data to the resolved environment's base URL"],
+    "expected_result": "Response status is 401. The API accepts the oversized field rather than rejecting it with a 400/413-class error. Response body is empty.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-BOUNDARY-006",
+    "title": "POST /api/login with a whitespace-only username returns 401",
+    "type": "API",
+    "feature": "bookcart-login",
+    "flow": "boundary-input-handling",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "body": {"username": "   ", "password": "SomePassword123"},
+      "expected_status": 401
+    },
+    "steps": ["Send the request described in Test Data to the resolved environment's base URL"],
+    "expected_result": "Response status is 401. Response body is empty.",
+    "linked_requirement": "None"
+  }
+]
