@@ -1,0 +1,62 @@
+[
+  {
+    "id": "TC-BOOKCARTLOGIN-FAILEDLOGIN-001",
+    "title": "Login fails silently with an unknown username and an arbitrary password",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "failed-login",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "nonexistentuser12345", "password": "WrongPassword123!"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter \"nonexistentuser12345\" in the Username field",
+      "Enter \"WrongPassword123!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login fails - the user remains on /login and no session is established. No visible error, toast, or inline message appears anywhere on the page (confirmed app behavior: the server responds 401 with an empty body and the UI surfaces zero feedback). Pass criterion is 'still on /login, no session cookie', not any visible message.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-FAILEDLOGIN-002",
+    "title": "Login fails with a known/existing username and the wrong password",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "failed-login",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in", "Username 'adminuser' is confirmed to exist on this instance (per GET /api/user/validateUserName) though its real password is unknown"],
+    "test_data": {"username": "adminuser", "password": "definitely-wrong-password"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter \"adminuser\" in the Username field",
+      "Enter \"definitely-wrong-password\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login fails - the user remains on /login and no session is established. No visible error, toast, or inline message appears (same silent-401 behavior as an unknown username; the app does not distinguish the two cases to the end user).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-FAILEDLOGIN-003",
+    "title": "POST /api/login with invalid credentials returns 401 with an empty body",
+    "type": "API",
+    "feature": "bookcart-login",
+    "flow": "failed-login",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/login",
+      "headers": {"Content-Type": "application/json"},
+      "body": {"username": "nonexistentuser12345", "password": "WrongPassword123!"},
+      "expected_status": 401
+    },
+    "steps": [
+      "Send the request described in Test Data to the resolved environment's base URL"
+    ],
+    "expected_result": "Response status is 401. Response body is empty (content-length: 0). No session token/cookie is returned in the response headers.",
+    "linked_requirement": "None"
+  }
+]

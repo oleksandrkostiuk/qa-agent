@@ -1,0 +1,26 @@
+[
+  {
+    "id": "TC-BOOKCARTLOGIN-SUCCESS-001",
+    "title": "Successful login with valid username and password",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "successful-login",
+    "priority": "Critical",
+    "tags": ["smoke", "regression"],
+    "preconditions": [
+      "User is not logged in",
+      "A valid bookcart account exists",
+      "No working credential is currently available for this environment (PROJECT_CONFIG.json -> credentials.book is empty, and the only candidate seed credential does not authenticate - see explorer-output/login.md OPEN RISKS #1)",
+      "This case requires a human to supply a valid username/password before it can execute past 'blocked'"
+    ],
+    "test_data": {"username": "<human-supplied valid bookcart username>", "password": "<human-supplied valid bookcart password>"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter the valid username in the Username field",
+      "Enter the valid password in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "User is redirected away from /login (e.g. to the home/products page), a session is established, and authenticated-only UI becomes visible (e.g. account/profile controls in the header).",
+    "linked_requirement": "None"
+  }
+]

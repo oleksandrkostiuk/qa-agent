@@ -1,0 +1,132 @@
+[
+  {
+    "id": "TC-REGISTER-USERNAME-001",
+    "title": "Username already taken shows inline \"not available\" message",
+    "type": "UI",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "High",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)", "username \"test\" already exists on the instance"],
+    "test_data": {
+      "userName": "test"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Enter \"test\" into the User Name field",
+      "Move focus away from the User Name field (blur)"
+    ],
+    "expected_result": "An async check fires (GET /api/user/validateUserName/test) and the exact client-side message \"User Name is not available\" is displayed inline under the User Name field.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-USERNAME-002",
+    "title": "API - validateUserName returns false for an existing username",
+    "type": "API",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["Username \"test\" already exists on the instance"],
+    "test_data": {
+      "method": "GET",
+      "endpoint": "/api/user/validateUserName/test",
+      "headers": {},
+      "body": null,
+      "expected_status": 200
+    },
+    "steps": [
+      "Send GET /api/user/validateUserName/test"
+    ],
+    "expected_result": "Response status is 200; response body is the boolean \"false\" (username is not available).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-USERNAME-003",
+    "title": "API - validateUserName returns true for an available username",
+    "type": "API",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "GET",
+      "endpoint": "/api/user/validateUserName/qa_avail_check_<timestamp>",
+      "headers": {},
+      "body": null,
+      "expected_status": 200
+    },
+    "steps": [
+      "Send GET /api/user/validateUserName/qa_avail_check_<timestamp> with a username value not used elsewhere"
+    ],
+    "expected_result": "Response status is 200; response body is the boolean \"true\" (username is available).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-USERNAME-004",
+    "title": "API - validateUserName treats a whitespace-only username as available",
+    "type": "API",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "Low",
+    "tags": ["boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "GET",
+      "endpoint": "/api/user/validateUserName/%20",
+      "headers": {},
+      "body": null,
+      "expected_status": 200
+    },
+    "steps": [
+      "Send GET /api/user/validateUserName/%20 (single whitespace character, URL-encoded)"
+    ],
+    "expected_result": "Response status is 200; response body is the boolean \"true\" - documents a gap: a whitespace-only value is treated as \"available\" rather than being rejected as invalid input.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-USERNAME-005",
+    "title": "API - validateUserName with empty path segment returns an inconsistent response shape",
+    "type": "API",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": [],
+    "test_data": {
+      "method": "GET",
+      "endpoint": "/api/user/validateUserName/",
+      "headers": {},
+      "body": null,
+      "expected_status": 200
+    },
+    "steps": [
+      "Send GET /api/user/validateUserName/ (no username path segment)"
+    ],
+    "expected_result": "Response status is 200; response body is \"0\", not a boolean - documents a contract gap: the endpoint's documented response shape is boolean, but an empty path segment returns a numeric 0 instead.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-USERNAME-006",
+    "title": "API - registering with an already-taken username is not rejected by the server (bug)",
+    "type": "API",
+    "feature": "register",
+    "flow": "username-availability",
+    "priority": "High",
+    "tags": ["security", "negative"],
+    "preconditions": ["Username \"test\" already exists on the instance"],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/user/",
+      "headers": { "Content-Type": "application/json" },
+      "body": { "firstName": "QA", "lastName": "Tester", "userName": "test", "password": "Passw0rd1", "confirmPassword": "Passw0rd1", "gender": "Male" },
+      "expected_status": 400
+    },
+    "steps": [
+      "Send POST /api/user/ directly (bypassing the UI's client-side availability check) with userName \"test\" and otherwise valid data"
+    ],
+    "expected_result": "Server should reject the duplicate username registration (e.g. 400/409) - this is the intended/correct behavior being asserted. NOTE: this case currently FAILS against the live app, which returns 200 OK and accepts the request despite the duplicate username; server-side uniqueness enforcement is not implemented. This is a known product gap (see explorer-output/register.md GAPS FOUND) - the test documents the bug rather than being skipped.",
+    "linked_requirement": "None"
+  }
+]
