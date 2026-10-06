@@ -1,0 +1,32 @@
+[
+  {
+    "id": "TC-REGISTER-FEMALE-001",
+    "title": "Register new account with valid data and Female gender succeeds",
+    "type": "UI",
+    "feature": "register",
+    "flow": "happy-path-female",
+    "priority": "Medium",
+    "tags": ["regression"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "userName": "qa_register_f_<timestamp>",
+      "password": "Passw0rd1",
+      "confirmPassword": "Passw0rd1",
+      "gender": "Female"
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Enter \"QA\" into the First Name field",
+      "Enter \"Tester\" into the Last Name field",
+      "Enter the generated unique username into the User Name field",
+      "Enter \"Passw0rd1\" into the Password field",
+      "Enter \"Passw0rd1\" into the Confirm Password field",
+      "Select the \"Female\" gender radio button",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "No validation errors are shown on any field; the app redirects to /login (there is no on-page success/confirmation message - the redirect itself is the success signal).",
+    "linked_requirement": "None"
+  }
+]

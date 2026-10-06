@@ -1,0 +1,50 @@
+[
+  {
+    "id": "TC-REGISTER-GENDER-001",
+    "title": "Submitting with no gender selected silently blocks the form",
+    "type": "UI",
+    "feature": "register",
+    "flow": "gender-not-selected",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["Anonymous user on the register page (bookcart environment)"],
+    "test_data": {
+      "firstName": "QA",
+      "lastName": "Tester",
+      "userName": "qa_gender_none_<timestamp>",
+      "password": "Passw0rd1",
+      "confirmPassword": "Passw0rd1",
+      "gender": null
+    },
+    "steps": [
+      "Navigate to the register page",
+      "Fill First Name, Last Name, User Name, Password, and Confirm Password with valid data",
+      "Do not select either gender radio button",
+      "Click the Register/Submit button"
+    ],
+    "expected_result": "The click is a no-op - no validation error is shown anywhere on the page, the submit button remains enabled, no POST /api/user/ network request fires, and the page remains on /register.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-REGISTER-GENDER-002",
+    "title": "API - registering with an invalid gender enum value is rejected",
+    "type": "API",
+    "feature": "register",
+    "flow": "gender-not-selected",
+    "priority": "Medium",
+    "tags": ["negative", "security"],
+    "preconditions": [],
+    "test_data": {
+      "method": "POST",
+      "endpoint": "/api/user/",
+      "headers": { "Content-Type": "application/json" },
+      "body": { "firstName": "QA", "lastName": "Tester", "userName": "qa_gender_invalid_<timestamp>", "password": "Passw0rd1", "confirmPassword": "Passw0rd1", "gender": "Other" },
+      "expected_status": 400
+    },
+    "steps": [
+      "Send POST /api/user/ directly with gender set to \"Other\" (a value not exposed by the UI's two radio options) and otherwise valid data"
+    ],
+    "expected_result": "Response status is 400 Bad Request - the server enforces the gender enum (Male/Female) even though this value can't be produced through the UI.",
+    "linked_requirement": "None"
+  }
+]
