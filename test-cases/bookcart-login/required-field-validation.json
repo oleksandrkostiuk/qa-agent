@@ -1,0 +1,58 @@
+[
+  {
+    "id": "TC-BOOKCARTLOGIN-REQUIREDFIELDS-001",
+    "title": "Submitting the login form with an empty username shows a required-field message",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "required-field-validation",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "", "password": "SomePassword123"},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Leave the Username field empty; click into it and then blur it (tab away) without typing",
+      "Enter \"SomePassword123\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "An inline validation message 'Username is required' appears under the Username field. No POST /api/login network call is made - the block is entirely client-side and the Login button click is a no-op. The user remains on /login.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-REQUIREDFIELDS-002",
+    "title": "Submitting the login form with an empty password shows a required-field message",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "required-field-validation",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "someuser", "password": ""},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Enter \"someuser\" in the Username field",
+      "Leave the Password field empty; click into it and then blur it (tab away) without typing",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "An inline validation message 'Password is required' appears under the Password field. No POST /api/login network call is made - the block is entirely client-side and the Login button click is a no-op. The user remains on /login.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-BOOKCARTLOGIN-REQUIREDFIELDS-003",
+    "title": "Submitting the login form with both fields empty shows both required-field messages",
+    "type": "UI",
+    "feature": "bookcart-login",
+    "flow": "required-field-validation",
+    "priority": "Medium",
+    "tags": ["negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "", "password": ""},
+    "steps": [
+      "Navigate to https://bookcart.azurewebsites.net/login",
+      "Leave both the Username and Password fields empty; click into and blur each one in turn",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Both 'Username is required' and 'Password is required' inline validation messages appear. No POST /api/login network call is made. The user remains on /login.",
+    "linked_requirement": "None"
+  }
+]
