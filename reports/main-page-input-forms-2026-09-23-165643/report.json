@@ -1,0 +1,189 @@
+[
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-001",
+    "status": "fail",
+    "actual_result": "Form re-rendered with error 'There was a problem with your submission. Please review the fields below.' and the email field was marked invalid, despite a syntactically valid email. Reproduced on retry (same result both attempts). Matches known BUG-001.",
+    "expected_result": "Form submits successfully and a confirmation/success message is displayed to the user; no error is shown.",
+    "error_message": "There was a problem with your submission. Please review the fields below.",
+    "screenshot": "screenshots/TC-MAINPAGE-NEWSLETTER-001.png",
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T16:57:06Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-002",
+    "status": "pass",
+    "actual_result": "Submitting with an empty email field was rejected: form did not submit, generic validation error banner shown, email field marked invalid.",
+    "expected_result": "Form is not submitted; a validation error indicating the email field is required is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T16:59:14Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-003",
+    "status": "pass",
+    "actual_result": "Submitting 'qatestexample.com' (no @) was rejected: form did not submit, validation error banner shown, field marked invalid.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T16:59:50Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-004",
+    "status": "pass",
+    "actual_result": "Submitting 'qatest@' (no domain) was rejected: form did not submit, validation error banner shown, field marked invalid.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:00:10Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-005",
+    "status": "pass",
+    "actual_result": "Submitting 'qa test@example.com' (contains space) was rejected: form did not submit, validation error banner shown, field marked invalid.",
+    "expected_result": "Form is not submitted; a validation error indicating an invalid email format is displayed.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:00:33Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-006",
+    "status": "pass",
+    "actual_result": "Submitting 'qa-test-006@example.com.' (trailing dot) was consistently rejected with a validation error; no crash or unhandled error occurred.",
+    "expected_result": "Form either rejects the value with a validation error, or normalizes/accepts it consistently — behavior must not silently fail or throw an unhandled error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:01:00Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-007",
+    "status": "pass",
+    "actual_result": "Submitting a 300+ character local-part email was rejected with a clear validation error; no page crash, no unhandled JS error, no server 500.",
+    "expected_result": "Form either accepts and submits successfully or rejects with a clear validation error; no page crash, no unhandled JS error, no server 500.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:01:22Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-008",
+    "status": "pass",
+    "actual_result": "Submitting 'qa-tëst+special_008@example.com' (unicode/special chars) was rejected consistently with a validation error; no unhandled error thrown.",
+    "expected_result": "Form either accepts the value as valid or rejects it with a clear validation error; behavior must be consistent and not throw an unhandled error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:01:43Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-009",
+    "status": "pass",
+    "actual_result": "Clicked Subscribe 5 times within ~1 second. Gravity Forms client-side guard explicitly aborted 4 of the 5 attempts ('Aborting submission. Another submission is already in progress for form #5'); only one submission/error state was rendered (no duplicate confirmation/error messages), no client-side crash.",
+    "expected_result": "Only one submission is processed (button disables/debounces after first click, or duplicate clicks are ignored); no duplicate confirmation messages and no client-side error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:02:00Z"
+  },
+  {
+    "id": "TC-MAINPAGE-NEWSLETTER-010",
+    "status": "fail",
+    "actual_result": "Submission blocked with the same generic 'There was a problem with your submission' error on both the initial attempt and the retry, consistent with the reCAPTCHA v3 bot-score execution risk flagged in this case's precondition and already tracked as BUG-001 (same root cause as TC-MAINPAGE-NEWSLETTER-001). Recorded as a known execution risk, not a new/separate functional defect.",
+    "expected_result": "Form submits successfully with no reCAPTCHA-related block. If blocked, record as a known execution risk per OPEN RISKS before escalating as a bug.",
+    "error_message": "There was a problem with your submission. Please review the fields below.",
+    "screenshot": "screenshots/TC-MAINPAGE-NEWSLETTER-010.png",
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:02:59Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-001",
+    "status": "pass",
+    "actual_result": "Searching 'glass' navigated to '/?s=glass' with page title 'You searched for glass - Skyline'; a search results page rendered with no error.",
+    "expected_result": "Browser navigates to \"/?s=glass\" (or equivalent results route) and a search results page is rendered with no error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:04:50Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-002",
+    "status": "pass",
+    "actual_result": "Submitting an empty query navigated to '/?s=' and rendered an empty-query results state; no page crash or server error.",
+    "expected_result": "Form either prevents submission client-side, or navigates to a results page showing an appropriate empty/no-query state; no page crash or server error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:05:22Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-003",
+    "status": "pass",
+    "actual_result": "Query '<script>alert(1)</script>' was percent-encoded in the URL ('%3Cscript%3Ealert%281%29%3C%2Fscript%3E'). DOM check confirmed no raw <script> tag was injected into document.body.innerHTML (properly escaped); no script executed, no JS alert fired.",
+    "expected_result": "Query string is escaped/encoded in the URL and rendered results page; no script execution occurs (no JS alert), no unescaped HTML injection is visible in the rendered page.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:05:49Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-004",
+    "status": "pass",
+    "actual_result": "Submitting a 500-character alphanumeric query loaded a results page with no crash, unhandled JS error, or server 500; 0 console errors observed.",
+    "expected_result": "Results page loads without a crash, unhandled JS error, or server 500; an appropriate results/no-results state is shown.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:12:28Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-005",
+    "status": "pass",
+    "actual_result": "Submitting a whitespace-only query ('   ') navigated to '/?s=+++' and rendered an empty-query-equivalent results state; no page crash or server error.",
+    "expected_result": "Form treats the query as effectively empty — either blocks submission or shows an appropriate empty/no-query results state; no page crash or server error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:12:54Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-006",
+    "status": "pass",
+    "actual_result": "As an anonymous user (no login performed throughout the entire run), searching 'test' executed successfully with no authentication prompt, login redirect, or access-denied error.",
+    "expected_result": "Search executes successfully with no authentication prompt, redirect to a login page, or access-denied error.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:13:17Z"
+  },
+  {
+    "id": "TC-MAINPAGE-SEARCH-007",
+    "status": "pass",
+    "actual_result": "Typing 'gla' character-by-character triggered a live autocomplete dropdown showing matching suggestions (e.g. \"Glassboards (market)\", \"Deep Etch Glass (technique)\", \"Digitally Printed Glass (technique)\", plus an \"All results\" link).",
+    "expected_result": "A suggestions/autocomplete dropdown appears showing matching suggestions as the user types; if no suggestions feature exists, no dropdown appears and no JS error occurs.",
+    "error_message": null,
+    "screenshot": null,
+    "environment": "dev",
+    "base_url": "https://dev.skyline.glass/",
+    "executed_at": "2026-09-23T17:13:37Z"
+  }
+]
