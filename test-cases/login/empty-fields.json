@@ -1,0 +1,59 @@
+[
+  {
+    "id": "TC-LOGIN-EMPTY-001",
+    "title": "Login fails with empty username and valid password",
+    "type": "UI",
+    "feature": "login",
+    "flow": "empty-fields",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "", "password": "SuperSecretPassword!"},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Leave the Username field empty",
+      "Enter \"SuperSecretPassword!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected with error flash message \"Your username is invalid!\" (empty username is treated as an invalid username, not a distinct required-field error — no client-side `required` validation exists on this field).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-EMPTY-002",
+    "title": "Login fails with valid username and empty password",
+    "type": "UI",
+    "feature": "login",
+    "flow": "empty-fields",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "tomsmith", "password": ""},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter \"tomsmith\" in the Username field",
+      "Leave the Password field empty",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected with error flash message \"Your password is invalid!\".",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-EMPTY-003",
+    "title": "Login fails with both username and password empty",
+    "type": "UI",
+    "feature": "login",
+    "flow": "empty-fields",
+    "priority": "Medium",
+    "tags": ["negative", "boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "", "password": ""},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Leave the Username field empty",
+      "Leave the Password field empty",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected with error flash message \"Your username is invalid!\" (username is checked before password, so the username error takes precedence even though both fields are empty).",
+    "linked_requirement": "None"
+  }
+]

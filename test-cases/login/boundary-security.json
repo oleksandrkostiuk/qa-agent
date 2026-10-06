@@ -1,0 +1,97 @@
+[
+  {
+    "id": "TC-LOGIN-BOUNDARY-001",
+    "title": "Long string input in username field does not crash or bypass login",
+    "type": "UI",
+    "feature": "login",
+    "flow": "boundary-security",
+    "priority": "Low",
+    "tags": ["boundary", "security", "negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "a-repeated-500-times", "password": "SuperSecretPassword!"},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter a 500-character string of \"a\" in the Username field",
+      "Enter \"SuperSecretPassword!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "The application does not crash or return a 500 error; login is rejected with the standard \"Your username is invalid!\" error, and the login page remains fully functional.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-BOUNDARY-002",
+    "title": "XSS-style payload in username field is not executed or reflected",
+    "type": "UI",
+    "feature": "login",
+    "flow": "boundary-security",
+    "priority": "Low",
+    "tags": ["security", "negative", "boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "<script>alert(1)</script>", "password": "SuperSecretPassword!"},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter \"<script>alert(1)</script>\" in the Username field",
+      "Enter \"SuperSecretPassword!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "No JavaScript alert/dialog fires, the payload is not reflected as executable markup anywhere in the resulting page's DOM, and login is rejected with the standard \"Your username is invalid!\" error.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-BOUNDARY-003",
+    "title": "SQL-injection-style payload does not bypass authentication",
+    "type": "UI",
+    "feature": "login",
+    "flow": "boundary-security",
+    "priority": "Low",
+    "tags": ["security", "negative", "boundary"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "' OR '1'='1", "password": "' OR '1'='1"},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter \"' OR '1'='1\" in the Username field",
+      "Enter \"' OR '1'='1\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected with the standard \"Your username is invalid!\" error (no authentication bypass), and no server error (500) or unhandled exception occurs.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-BOUNDARY-004",
+    "title": "Whitespace-only username and password are treated as invalid, not empty",
+    "type": "UI",
+    "feature": "login",
+    "flow": "boundary-security",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "   ", "password": "   "},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter three space characters in the Username field",
+      "Enter three space characters in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "Login is rejected with error flash message \"Your username is invalid!\" — whitespace is not trimmed to an empty value that would trigger different handling, and no crash occurs.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-LOGIN-BOUNDARY-005",
+    "title": "Unicode characters in username field are accepted without crashing",
+    "type": "UI",
+    "feature": "login",
+    "flow": "boundary-security",
+    "priority": "Low",
+    "tags": ["boundary", "negative"],
+    "preconditions": ["User is not logged in"],
+    "test_data": {"username": "тестユーザー日本語", "password": "SuperSecretPassword!"},
+    "steps": [
+      "Navigate to https://the-internet.herokuapp.com/login",
+      "Enter \"тестユーザー日本語\" in the Username field",
+      "Enter \"SuperSecretPassword!\" in the Password field",
+      "Click the \"Login\" button"
+    ],
+    "expected_result": "The application accepts the unicode input without crashing or rendering errors; login is rejected with the standard \"Your username is invalid!\" error.",
+    "linked_requirement": "None"
+  }
+]
