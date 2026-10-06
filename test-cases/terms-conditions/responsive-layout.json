@@ -1,0 +1,75 @@
+[
+  {
+    "id": "TC-TERMS-RESPONSIVE-001",
+    "title": "Verify page renders correctly at mobile viewport (390px)",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "responsive-layout",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page (https://dev.skyline.glass/terms-conditions/) is loaded"],
+    "test_data": {"viewport_width": "390px"},
+    "steps": [
+      "Resize the browser/viewport to 390px width",
+      "Open the Terms & Conditions page",
+      "Scroll through the full page, checking for horizontal scroll, text reflow, and header nav state"
+    ],
+    "expected_result": "No horizontal scroll appears at any point on the page; body text reflows to fit the viewport width; header navigation collapses into its mobile pattern (e.g. hamburger menu) correctly.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-RESPONSIVE-002",
+    "title": "Verify page renders correctly at tablet viewport (~768px)",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "responsive-layout",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"viewport_width": "~768px"},
+    "steps": [
+      "Resize the browser/viewport to ~768px width",
+      "Open the Terms & Conditions page",
+      "Scroll through the full page, checking for horizontal scroll, text reflow, and header nav state"
+    ],
+    "expected_result": "No horizontal scroll appears at any point on the page; body text reflows correctly for the tablet breakpoint; header navigation renders in its intended tablet layout.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-RESPONSIVE-003",
+    "title": "Verify page renders correctly at desktop viewport (1280px+)",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "responsive-layout",
+    "priority": "Medium",
+    "tags": ["UI"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"viewport_width": "1280px+"},
+    "steps": [
+      "Resize the browser/viewport to 1280px width (and repeat at a wider desktop width, e.g. 1920px)",
+      "Open the Terms & Conditions page",
+      "Scroll through the full page, checking layout, max-width constraints, and header nav state"
+    ],
+    "expected_result": "Content is constrained to a readable max-width (not stretched edge-to-edge on very wide screens), no horizontal scroll appears, and the full desktop header navigation displays correctly.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-TERMS-RESPONSIVE-004",
+    "title": "Verify long unbroken paragraph (Section 11.b) does not overflow or clip on narrow viewports",
+    "type": "UI",
+    "feature": "terms-conditions",
+    "flow": "responsive-layout",
+    "priority": "Medium",
+    "tags": ["UI", "boundary"],
+    "preconditions": ["Terms & Conditions page is loaded"],
+    "test_data": {"section": "11.b", "paragraph_length_chars": "~1900"},
+    "steps": [
+      "Resize the browser/viewport to 390px width (mobile)",
+      "Scroll to Section 11.b",
+      "Inspect the full paragraph for overflow, clipping, or horizontal scroll",
+      "Repeat at ~768px (tablet) width"
+    ],
+    "expected_result": "The long paragraph wraps within the viewport at all tested widths with no clipping, no text cut off, and no horizontal scroll introduced.",
+    "linked_requirement": "None"
+  }
+]
