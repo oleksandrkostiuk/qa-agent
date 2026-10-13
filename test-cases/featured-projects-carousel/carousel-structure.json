@@ -1,0 +1,144 @@
+[
+  {
+    "id": "TC-CAROUSEL-STRUCT-001",
+    "title": "Verify Featured Projects section shows heading, Prev/Next buttons and slide count matching data-total",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "carousel-structure",
+    "priority": "Medium",
+    "tags": [
+      "smoke",
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in"
+    ],
+    "test_data": {
+      "carousel_selector": "#projects-carousel",
+      "slide_selector": "#projects-carousel article.js-drag-item",
+      "prev_selector": "#carousel__prev",
+      "next_selector": "#carousel__next",
+      "note": "exact titles and order are not asserted"
+    },
+    "steps": [
+      "Scroll to the section with the h3 heading \"Featured Projects\"",
+      "Read the data-total attribute of #projects-carousel",
+      "Count the slides matching \"#projects-carousel article.js-drag-item\"",
+      "Locate the Prev (#carousel__prev) and Next (#carousel__next) buttons"
+    ],
+    "expected_result": "The heading \"Featured Projects\" is visible. At least one slide exists and the slide count equals the data-total value (5 at the time of exploration). Both the Prev and Next buttons are present and visible.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-STRUCT-002",
+    "title": "Verify every slide has a non-empty title, a Technique line and a View Project link",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "carousel-structure",
+    "priority": "Medium",
+    "tags": [
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view"
+    ],
+    "test_data": {
+      "title_selector": "h4",
+      "link_selector": "a.more-link",
+      "link_text": "View Project",
+      "note": "slide image loading is not asserted (known dev data issue)"
+    },
+    "steps": [
+      "List all slides in \"#projects-carousel article.js-drag-item\"",
+      "For each slide read the text of the h4 title",
+      "For each slide check that a \"Technique:\" line with a non-empty value is present",
+      "For each slide check that a link a.more-link with the text \"View Project\" is present"
+    ],
+    "expected_result": "Every slide has a non-empty h4 title, a \"Technique:\" line with a non-empty value, and an a.more-link link labelled \"View Project\".",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-STRUCT-003",
+    "title": "Verify a slide without a \"Pattern type\" line renders no empty Pattern type row",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "carousel-structure",
+    "priority": "Low",
+    "tags": [
+      "boundary",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "At least one slide has no \"Pattern type:\" line (Alma Lasers at the time of exploration); if every slide has one, the \"absent\" part of the check is not applicable"
+    ],
+    "test_data": {
+      "optional_line": "Pattern type:"
+    },
+    "steps": [
+      "For each slide check whether a \"Pattern type:\" line is present",
+      "For slides that have the line, read its value",
+      "For slides that do not have the line, inspect the slide text block for an empty \"Pattern type:\" label or an empty row"
+    ],
+    "expected_result": "Slides that have a \"Pattern type:\" line show a non-empty value. Slides without it show no \"Pattern type:\" label and no empty row; the rest of the slide (title, Technique, View Project) renders normally.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-STRUCT-004",
+    "title": "Verify the carousel starts on the first slide and does not autoplay",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "carousel-structure",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view"
+    ],
+    "test_data": {
+      "wait_seconds": 8
+    },
+    "steps": [
+      "Reload the home page and scroll the Featured Projects section into view",
+      "Read the inline transform (translate3d X offset) of the slide track inside #projects-carousel and the first visible slide title",
+      "Wait 8 seconds without interacting with the page",
+      "Read the translate3d X offset and the first visible slide title again"
+    ],
+    "expected_result": "The first slide (item--0) is the first visible slide on load. The track offset and the first visible slide are identical before and after the 8-second wait (no autoplay).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-STRUCT-005",
+    "title": "Verify slide description is visible on desktop width",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "carousel-structure",
+    "priority": "Low",
+    "tags": [
+      "boundary",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view"
+    ],
+    "test_data": {
+      "description_selector": ".pt-box",
+      "viewport": "1280x800",
+      "note": "long descriptions may be truncated with \"...\""
+    },
+    "steps": [
+      "For the first slide, read the .pt-box description text and check it is displayed",
+      "Click Next and wait about 1 second for the slide animation to finish; repeat the description check for the slide now in view",
+      "Repeat the previous step until every slide has been checked (or the carousel wraps)"
+    ],
+    "expected_result": "At desktop width the .pt-box description of each checked slide is displayed and non-empty. Truncation with an ellipsis (\"...\") is acceptable for long descriptions.",
+    "linked_requirement": "None"
+  }
+]

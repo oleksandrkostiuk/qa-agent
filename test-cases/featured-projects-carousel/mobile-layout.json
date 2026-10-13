@@ -1,0 +1,86 @@
+[
+  {
+    "id": "TC-CAROUSEL-MOBILE-001",
+    "title": "Verify mobile layout shows one slide per view, hides descriptions and has no horizontal overflow",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "mobile-layout",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at mobile viewport 390x844; user is not logged in",
+      "Featured Projects section is scrolled into view"
+    ],
+    "test_data": {
+      "viewport": "390x844",
+      "expected_slide_width": "about 390px",
+      "description_selector": ".pt-box"
+    },
+    "steps": [
+      "Read the width of a slide and the width of the carousel container",
+      "Check how many slides are fully visible in the carousel viewport",
+      "Check whether the .pt-box description is displayed on each slide",
+      "Compare document.documentElement.scrollWidth with the viewport width"
+    ],
+    "expected_result": "Slide width is about 390px (the viewport width) and exactly one slide is visible at a time. The .pt-box description is hidden on every slide. The page has no horizontal overflow (scrollWidth does not exceed the viewport width).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-MOBILE-002",
+    "title": "Verify Prev/Next buttons are visible below the heading and work on mobile",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "mobile-layout",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at mobile viewport 390x844; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "viewport": "390x844",
+      "slide_step": "about 390px",
+      "tolerance": "+/-5px"
+    },
+    "steps": [
+      "Locate the Prev (#carousel__prev) and Next (#carousel__next) buttons and check they are displayed below the \"Featured Projects\" heading and not covered by other elements",
+      "Read the translate3d X offset of the slide track",
+      "Tap Next once, wait about 1 second for the slide animation to finish, and read the offset again",
+      "Tap Prev once, wait about 1 second for the slide animation to finish, and read the offset again"
+    ],
+    "expected_result": "Both buttons are displayed below the heading and can be tapped. Next moves the track by one slide step (about 390px, within tolerance) and Prev moves it back to the initial offset.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-MOBILE-003",
+    "title": "Verify the View Project link opens the matching project page on mobile",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "mobile-layout",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at mobile viewport 390x844; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "viewport": "390x844",
+      "title_comparison": "h1 text equals slide h4 title, ignoring case and surrounding whitespace"
+    },
+    "steps": [
+      "Note the title and the href of the slide in view",
+      "Tap its \"View Project\" link",
+      "Read the page URL and the h1 text of the opened page"
+    ],
+    "expected_result": "The opened page URL matches the slide link href, the page loads without an error, and its h1 text matches the slide title.",
+    "linked_requirement": "None"
+  }
+]
