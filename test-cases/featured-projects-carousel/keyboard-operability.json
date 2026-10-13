@@ -1,0 +1,59 @@
+[
+  {
+    "id": "TC-CAROUSEL-KEYBOARD-001",
+    "title": "Verify Prev/Next buttons are not reachable with Tab and have no accessible name",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "keyboard-operability",
+    "priority": "Low",
+    "tags": [
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Current behaviour is documented; if keyboard accessibility becomes a requirement this case is a defect and its expected result flips (see OPEN RISKS)"
+    ],
+    "test_data": {
+      "tab_presses": 15,
+      "buttons": "#carousel__prev, #carousel__next"
+    },
+    "steps": [
+      "Click on the \"Featured Projects\" heading (a non-interactive element) to set the keyboard starting point",
+      "Press Tab up to 15 times and after each press record document.activeElement",
+      "Read the tabindex, role and aria-label attributes of #carousel__prev and #carousel__next"
+    ],
+    "expected_result": "Neither #carousel__prev nor #carousel__next ever receives focus during the Tab sequence (tabindex is -1). Both elements have no aria-label and no role attribute.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-KEYBOARD-002",
+    "title": "Verify arrow keys do not move the carousel",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "keyboard-operability",
+    "priority": "Low",
+    "tags": [
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide",
+      "Current behaviour is documented; if keyboard support is added this case must be updated"
+    ],
+    "test_data": {
+      "keys": "ArrowRight x3, ArrowLeft x3"
+    },
+    "steps": [
+      "Click on the \"Featured Projects\" heading to move focus to the page body area",
+      "Read the translate3d X offset of the slide track",
+      "Press ArrowRight 3 times, then ArrowLeft 3 times",
+      "Read the translate3d X offset again and check the browser console for uncaught errors"
+    ],
+    "expected_result": "The track offset is unchanged after the key presses and no uncaught JavaScript error is raised.",
+    "linked_requirement": "None"
+  }
+]
