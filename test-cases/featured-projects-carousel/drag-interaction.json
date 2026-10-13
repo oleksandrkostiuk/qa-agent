@@ -1,0 +1,142 @@
+[
+  {
+    "id": "TC-CAROUSEL-DRAG-001",
+    "title": "Verify dragging the carousel left moves the content without navigating",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "drag-interaction",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "drag": "mouse down on the first slide image area, move 300px to the left in small steps, release",
+      "note": "final snap position is not asserted"
+    },
+    "steps": [
+      "Read the translate3d X offset of the slide track and the current page URL",
+      "Press the left mouse button on the first slide image area, move the pointer 300px to the left in small steps and release the button",
+      "Read the translate3d X offset and the current page URL again"
+    ],
+    "expected_result": "The track offset decreases (content moved to the left) compared to the initial value. The page URL is unchanged: the drag does not navigate to a project page.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-DRAG-002",
+    "title": "Verify dragging the carousel right moves the content back without navigating",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "drag-interaction",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "drag_left": "300px",
+      "drag_right": "300px"
+    },
+    "steps": [
+      "Drag the carousel 300px to the left (mouse down, move, release) and read the translate3d X offset (offset A)",
+      "Drag the carousel 300px to the right (mouse down, move, release) and read the translate3d X offset (offset B)",
+      "Read the current page URL"
+    ],
+    "expected_result": "Offset B is greater than offset A (content moved back to the right). The page URL is unchanged.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-DRAG-003",
+    "title": "Verify a plain click without dragging does not move the carousel",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "drag-interaction",
+    "priority": "Low",
+    "tags": [
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "click_target": "first slide image area"
+    },
+    "steps": [
+      "Read the translate3d X offset of the slide track",
+      "Click once on the first slide image area without moving the pointer",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset again"
+    ],
+    "expected_result": "The track offset is unchanged after the click.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-DRAG-004",
+    "title": "Verify a very short drag does not break the carousel or navigate",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "drag-interaction",
+    "priority": "Low",
+    "tags": [
+      "boundary",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "drag_distance": "10px (below the 30px threshold observed during exploration)",
+      "note": "resulting offset is not asserted"
+    },
+    "steps": [
+      "Press the left mouse button on the first slide image area, move the pointer 10px to the left and release",
+      "Read the current page URL and check the browser console for uncaught errors",
+      "Check that all slides and the Prev/Next buttons are still displayed"
+    ],
+    "expected_result": "The page URL is unchanged, no uncaught JavaScript error is raised, and all slides and the Prev/Next buttons remain displayed.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-DRAG-005",
+    "title": "Verify dragging far beyond the first and last slide does not break the page",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "drag-interaction",
+    "priority": "Low",
+    "tags": [
+      "boundary",
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "drag_right_at_start": "600px",
+      "drag_left_repeated": "3 drags of 600px",
+      "note": "bounds behaviour is not fully characterised; only stability is asserted"
+    },
+    "steps": [
+      "Drag the carousel 600px to the right while on the first slide",
+      "Drag the carousel 600px to the left three times in a row",
+      "Read the current page URL, check the browser console for uncaught errors, and check that the slides, the Prev/Next buttons and the \"Featured Projects\" heading are still displayed"
+    ],
+    "expected_result": "The page URL is unchanged, no uncaught JavaScript error is raised, and the heading, the carousel container, the slides and the Prev/Next buttons are still displayed.",
+    "linked_requirement": "None"
+  }
+]
