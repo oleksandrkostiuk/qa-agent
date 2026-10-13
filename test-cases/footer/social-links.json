@@ -74,5 +74,105 @@
     ],
     "expected_result": "YouTube link has a non-empty href, target=\"_blank\", and rel=\"noopener noreferrer nofollow\". Clicking it opens a new tab whose destination page loads successfully with no 404 or other error.",
     "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-005",
+    "title": "Verify Instagram footer icon has no platform-identifying accessible name (known gap)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["regression", "UI"],
+    "preconditions": ["Homepage is loaded", "Desktop viewport (>1200px)"],
+    "test_data": {"icon_label": "Instagram", "expected_href": "https://www.instagram.com/skylineglass/", "current_aria_label": " social profile - opens in a new tab"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the Instagram icon link (href = https://www.instagram.com/skylineglass/)",
+      "Read the link's aria-label attribute",
+      "Read the alt attribute of the <img> inside the link",
+      "Read the link's accessible name as computed by the browser (accessibility tree)"
+    ],
+    "expected_result": "Documents CURRENT behavior (known accessibility gap, not a defect filed): the Instagram link's aria-label is exactly \" social profile - opens in a new tab\" (leading space, no platform name, identical to the other 3 social icons), the inner <img> has no alt attribute, and the computed accessible name contains no reference to \"Instagram\". If a platform name is later added, this case fails and must be updated.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-006",
+    "title": "Verify LinkedIn footer icon has no platform-identifying accessible name (known gap)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["regression", "UI"],
+    "preconditions": ["Homepage is loaded", "Desktop viewport (>1200px)"],
+    "test_data": {"icon_label": "LinkedIn", "expected_href": "https://www.linkedin.com/company/skyline-design/", "current_aria_label": " social profile - opens in a new tab"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the LinkedIn icon link (href = https://www.linkedin.com/company/skyline-design/)",
+      "Read the link's aria-label attribute",
+      "Read the alt attribute of the <img> inside the link",
+      "Read the link's accessible name as computed by the browser (accessibility tree)"
+    ],
+    "expected_result": "Documents CURRENT behavior (known accessibility gap, not a defect filed): the LinkedIn link's aria-label is exactly \" social profile - opens in a new tab\" (leading space, no platform name, identical to the other 3 social icons), the inner <img> has no alt attribute, and the computed accessible name contains no reference to \"LinkedIn\". If a platform name is later added, this case fails and must be updated.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-007",
+    "title": "Verify Facebook footer icon has no platform-identifying accessible name (known gap)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["regression", "UI"],
+    "preconditions": ["Homepage is loaded", "Desktop viewport (>1200px)"],
+    "test_data": {"icon_label": "Facebook", "expected_href": "https://www.facebook.com/skylinedesignglass/", "current_aria_label": " social profile - opens in a new tab"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the Facebook icon link (href = https://www.facebook.com/skylinedesignglass/)",
+      "Read the link's aria-label attribute",
+      "Read the alt attribute of the <img> inside the link",
+      "Read the link's accessible name as computed by the browser (accessibility tree)"
+    ],
+    "expected_result": "Documents CURRENT behavior (known accessibility gap, not a defect filed): the Facebook link's aria-label is exactly \" social profile - opens in a new tab\" (leading space, no platform name, identical to the other 3 social icons), the inner <img> has no alt attribute, and the computed accessible name contains no reference to \"Facebook\". If a platform name is later added, this case fails and must be updated.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-008",
+    "title": "Verify YouTube footer icon has no platform-identifying accessible name (known gap)",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Medium",
+    "tags": ["regression", "UI"],
+    "preconditions": ["Homepage is loaded", "Desktop viewport (>1200px)"],
+    "test_data": {"icon_label": "YouTube", "expected_href": "http://www.youtube.com/@skyline-glass", "current_aria_label": " social profile - opens in a new tab"},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Locate the YouTube icon link (href = http://www.youtube.com/@skyline-glass)",
+      "Read the link's aria-label attribute",
+      "Read the alt attribute of the <img> inside the link",
+      "Read the link's accessible name as computed by the browser (accessibility tree)"
+    ],
+    "expected_result": "Documents CURRENT behavior (known accessibility gap, not a defect filed): the YouTube link's aria-label is exactly \" social profile - opens in a new tab\" (leading space, no platform name, identical to the other 3 social icons), the inner <img> has no alt attribute, and the computed accessible name contains no reference to \"YouTube\". If a platform name is later added, this case fails and must be updated.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-FOOTER-SOCIAL-009",
+    "title": "Verify YouTube footer link uses http:// while other social links use https://",
+    "type": "UI",
+    "feature": "footer",
+    "flow": "social-links",
+    "priority": "Low",
+    "tags": ["boundary", "security", "UI"],
+    "preconditions": ["Homepage is loaded"],
+    "test_data": {"youtube_href": "http://www.youtube.com/@skyline-glass", "other_hrefs": ["https://www.instagram.com/skylineglass/", "https://www.linkedin.com/company/skyline-design/", "https://www.facebook.com/skylinedesignglass/"]},
+    "steps": [
+      "Scroll to the footer social links section",
+      "Read the href of the Instagram, LinkedIn, Facebook and YouTube icon links",
+      "Note the protocol (scheme) of each href",
+      "Click the YouTube icon link and switch to the newly opened tab",
+      "Observe the final URL in the new tab and any security/insecure-connection warning"
+    ],
+    "expected_result": "Documents CURRENT behavior: Instagram, LinkedIn and Facebook hrefs start with \"https://\"; the YouTube href starts with \"http://\" (protocol inconsistency). Opening the YouTube link ends on an https:// URL (server redirect) with no browser insecure-connection warning. Any other outcome (warning page, no redirect, load failure) is a deviation to report.",
+    "linked_requirement": "None"
   }
 ]
