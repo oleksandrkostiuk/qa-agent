@@ -1,0 +1,149 @@
+[
+  {
+    "id": "TC-CAROUSEL-NAV-001",
+    "title": "Verify Next advances the carousel by exactly one slide",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "next-prev-navigation",
+    "priority": "High",
+    "tags": [
+      "smoke",
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "slide_step": "about 891px at 1280px viewport (slide width 890px)",
+      "tolerance": "+/-5px"
+    },
+    "steps": [
+      "Read the translate3d X offset of the slide track and the title of the first visible slide",
+      "Click the Next button (#carousel__next) once",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset and the title of the first visible slide again"
+    ],
+    "expected_result": "The track offset decreases by one slide step (about 891px, within tolerance) and the previously second slide becomes the first visible slide. The page URL does not change.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-NAV-002",
+    "title": "Verify Next on the last slide wraps back to the first slide",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "next-prev-navigation",
+    "priority": "High",
+    "tags": [
+      "boundary",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "clicks_to_reach_last_slide": "data-total - 1 (4 at the time of exploration)"
+    },
+    "steps": [
+      "Click Next once, then wait about 1 second for the slide animation to finish; repeat until the last slide (item--4 for 5 slides) is the current slide (data-total - 1 clicks in total)",
+      "Read the translate3d X offset of the slide track",
+      "Click Next once more and wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset and the title of the first visible slide"
+    ],
+    "expected_result": "After the extra Next click the carousel wraps: the track returns to the initial (first slide) offset and the first slide is the first visible slide again.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-NAV-003",
+    "title": "Verify Prev moves back by exactly one slide after Next",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "next-prev-navigation",
+    "priority": "High",
+    "tags": [
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "slide_step": "about 891px at 1280px viewport",
+      "tolerance": "+/-5px"
+    },
+    "steps": [
+      "Click Next once and wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset (offset A)",
+      "Click Next once more and wait about 1 second for the slide animation to finish",
+      "Click the Prev button (#carousel__prev) once and wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset (offset B)"
+    ],
+    "expected_result": "Offset B equals offset A (within tolerance): Prev moves the carousel back by exactly one slide.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-NAV-004",
+    "title": "Verify Prev on the first slide does not move or wrap the carousel",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "next-prev-navigation",
+    "priority": "Medium",
+    "tags": [
+      "boundary",
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "note": "asserts current behaviour; Prev does not wrap (see OPEN RISKS in explorer handoff)"
+    },
+    "steps": [
+      "Read the translate3d X offset of the slide track and the title of the first visible slide",
+      "Click the Prev button (#carousel__prev) once",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset and the title of the first visible slide again"
+    ],
+    "expected_result": "Nothing changes: the track offset and the first visible slide are the same as before the click (no movement, no wrap to the last slide). No error is shown and the page does not navigate.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-NAV-005",
+    "title": "Verify rapid repeated Next clicks do not break the carousel",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "next-prev-navigation",
+    "priority": "Medium",
+    "tags": [
+      "boundary",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "rapid_clicks": 5,
+      "interval_ms": "under 100, no waiting between clicks",
+      "tolerance": "+/-5px"
+    },
+    "steps": [
+      "Click the Next button (#carousel__next) 5 times in quick succession without waiting between clicks",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the translate3d X offset of the slide track and check the browser console for uncaught errors",
+      "Click Next once more, wait about 1 second for the slide animation to finish, and read the offset again"
+    ],
+    "expected_result": "No uncaught JavaScript error is raised and all slides are still present. After the rapid clicks the track rests at a valid slide position (offset is 0 or a negative whole multiple of one slide step, within tolerance). The additional Next click still changes the track position.",
+    "linked_requirement": "None"
+  }
+]
