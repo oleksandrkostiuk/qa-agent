@@ -1,0 +1,142 @@
+[
+  {
+    "id": "TC-CAROUSEL-LINK-001",
+    "title": "Verify every slide View Project link has a valid href that returns a successful response",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "view-project-links",
+    "priority": "High",
+    "tags": [
+      "smoke",
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view"
+    ],
+    "test_data": {
+      "link_selector": "a.more-link",
+      "expected_label": "View Project",
+      "expected_path_contains": "/project/"
+    },
+    "steps": [
+      "For each slide read the label and the href of its a.more-link link",
+      "Request each href (HTTP GET) and read the response status"
+    ],
+    "expected_result": "Every link is labelled \"View Project\", has a non-empty href that points to a project page (path contains \"/project/\"), and its URL responds with HTTP 200 (no 404 or other error).",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-LINK-002",
+    "title": "Verify clicking View Project opens the matching project page for every slide",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "view-project-links",
+    "priority": "High",
+    "tags": [
+      "regression",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "title_comparison": "h1 text equals slide h4 title, ignoring case and surrounding whitespace"
+    },
+    "steps": [
+      "Note the title and the href of the slide currently first in view",
+      "Click its \"View Project\" link",
+      "Read the page URL and the h1 text of the opened page",
+      "Navigate back to the home page, scroll to the Featured Projects section, and click Next as many times as needed to bring the next slide into view",
+      "Repeat steps 1-4 for each remaining slide"
+    ],
+    "expected_result": "For each slide the opened page URL matches the slide link href, the page loads without an error, and its h1 text matches the slide title.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-LINK-003",
+    "title": "Verify clicking a slide image does not navigate",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "view-project-links",
+    "priority": "Medium",
+    "tags": [
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "click_target": "first slide image (.js-drag-img)"
+    },
+    "steps": [
+      "Read the current page URL",
+      "Click the first slide image once without moving the pointer",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the current page URL"
+    ],
+    "expected_result": "The page stays on the home page: the URL is unchanged and no project page opens.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-LINK-004",
+    "title": "Verify clicking a slide title does not navigate",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "view-project-links",
+    "priority": "Medium",
+    "tags": [
+      "negative",
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "click_target": "first slide title (h4)"
+    },
+    "steps": [
+      "Read the current page URL",
+      "Click the first slide title (h4) once",
+      "Wait about 1 second for the slide animation to finish",
+      "Read the current page URL"
+    ],
+    "expected_result": "The page stays on the home page: the URL is unchanged and no project page opens.",
+    "linked_requirement": "None"
+  },
+  {
+    "id": "TC-CAROUSEL-LINK-005",
+    "title": "Verify returning to the home page with browser Back resets the carousel to the first slide",
+    "type": "UI",
+    "feature": "featured-projects-carousel",
+    "flow": "view-project-links",
+    "priority": "Medium",
+    "tags": [
+      "UI"
+    ],
+    "preconditions": [
+      "Home page (/) is loaded on the target environment at desktop viewport 1280x800; user is not logged in",
+      "Featured Projects section is scrolled into view",
+      "Carousel is on the first slide"
+    ],
+    "test_data": {
+      "next_clicks": 2
+    },
+    "steps": [
+      "Click Next twice, waiting for the animation after each click, and read the translate3d X offset",
+      "Click the \"View Project\" link of the first slide in view",
+      "Wait for the project page to load, then use the browser Back button",
+      "Scroll to the Featured Projects section and read the translate3d X offset and the first visible slide title"
+    ],
+    "expected_result": "The home page is shown again and the carousel is back at its start position: the first slide (item--0) is the first visible slide and the offset equals the initial value.",
+    "linked_requirement": "None"
+  }
+]
