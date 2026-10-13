@@ -7,3 +7,4 @@
 | login | 7 | 16 | 2026-09-23 |
 | register | 9 | 26 | 2026-10-05 |
 | bookcart-login | 5 | 14 | 2026-10-05 |
+| featured-projects-carousel | 6 | 25 | 2026-10-13 |
